@@ -1,0 +1,8 @@
+Analyzing holy_canvas...                                        
+
+   info - Statements in an if should be enclosed in a block - lib\ui\screens\batch_generator_screen.dart:460:11 - curly_braces_in_flow_control_structures
+   info - 'Share' is deprecated and shouldn't be used. Use SharePlus instead - lib\ui\screens\daily_design_screen.dart:66:11 - deprecated_member_use
+   info - 'shareXFiles' is deprecated and shouldn't be used. Use SharePlus.instance.share() instead - lib\ui\screens\daily_design_screen.dart:66:17 - deprecated_member_use
+   info - 'Share' is deprecated and shouldn't be used. Use SharePlus instead - lib\ui\screens\template_maker_screen.dart:139:13 - deprecated_member_use
+   info - 'shareXFiles' is deprecated and shouldn't be used. Use SharePlus.instance.share() instead - lib\ui\screens\template_maker_screen.dart:139:19 - deprecated_member_use
+

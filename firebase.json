@@ -1,0 +1,25 @@
+{
+    "flutter": {
+        "platforms": {
+            "android": {
+                "default": {
+                    "projectId": "holy-word-studio",
+                    "appId": "1:706443073313:android:2598bab91792b0f69f9060",
+                    "fileOutput": "android/app/google-services.json"
+                }
+            },
+            "dart": {
+                "lib/firebase_options.dart": {
+                    "projectId": "holy-word-studio",
+                    "configurations": {
+                        "android": "1:706443073313:android:2598bab91792b0f69f9060",
+                        "ios": "1:706443073313:ios:63b777458f78e46c9f9060",
+                        "macos": "1:706443073313:ios:63b777458f78e46c9f9060",
+                        "web": "1:706443073313:web:e8e3b2a7a7e621f79f9060",
+                        "windows": "1:706443073313:web:f55650bd853dea109f9060"
+                    }
+                }
+            }
+        }
+    }
+}

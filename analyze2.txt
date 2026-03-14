@@ -1,0 +1,356 @@
+﻿Analyzing holy_canvas...                                        
+
+  error - The method 'toJson' isn't defined for the type 'TemplateModel' - lib\logic\providers\template_editor_provider.dart:88:40 - undefined_method
+  error - Undefined name '_renderedTemplate' - lib\ui\screens\batch_generator_screen.dart:151:11 - undefined_identifier
+  error - Undefined name '_renderedTemplate' - lib\ui\screens\batch_generator_screen.dart:221:11 - undefined_identifier
+   info - Statements in an if should be enclosed in a block - lib\ui\screens\batch_generator_screen.dart:462:11 - curly_braces_in_flow_control_structures
+   info - 'Share' is deprecated and shouldn't be used. Use SharePlus instead - lib\ui\screens\daily_design_screen.dart:66:11 - deprecated_member_use
+   info - 'shareXFiles' is deprecated and shouldn't be used. Use SharePlus.instance.share() instead - lib\ui\screens\daily_design_screen.dart:66:17 - deprecated_member_use
+  error - The method '_CanvasArea' isn't defined for the type 'TemplateMakerScreen' - lib\ui\screens\template_maker_screen.dart:108:27 - undefined_method
+  error - The method '_EditorPanel' isn't defined for the type 'TemplateMakerScreen' - lib\ui\screens\template_maker_screen.dart:110:11 - undefined_method
+   info - 'Share' is deprecated and shouldn't be used. Use SharePlus instead - lib\ui\screens\template_maker_screen.dart:139:13 - deprecated_member_use
+   info - 'shareXFiles' is deprecated and shouldn't be used. Use SharePlus.instance.share() instead - lib\ui\screens\template_maker_screen.dart:139:19 - deprecated_member_use
+  error - Classes can't be declared inside other classes - lib\ui\screens\template_maker_screen.dart:503:1 - class_in_class
+  error - Expected a class member - lib\ui\screens\template_maker_screen.dart:503:19 - expected_class_member
+   info - The variable name 'StatefulWidget' isn't a lowerCamelCase identifier - lib\ui\screens\template_maker_screen.dart:503:27 - non_constant_identifier_names
+  error - Methods must have an explicit list of parameters - lib\ui\screens\template_maker_screen.dart:503:27 - missing_method_parameters
+  error - State isn't a type - lib\ui\screens\template_maker_screen.dart:505:3 - not_a_type
+  error - The name '_CanvasArea' isn't a type, so it can't be used as a type argument - lib\ui\screens\template_maker_screen.dart:505:9 - non_type_as_type_argument
+warning - The declaration 'createState' isn't referenced - lib\ui\screens\template_maker_screen.dart:505:22 - unused_element
+  error - The method '_CanvasAreaState' isn't defined for the type 'TemplateMakerScreen' - lib\ui\screens\template_maker_screen.dart:505:39 - undefined_method
+  error - Classes can't be declared inside other classes - lib\ui\screens\template_maker_screen.dart:508:1 - class_in_class
+  error - Expected a class member - lib\ui\screens\template_maker_screen.dart:508:24 - expected_class_member
+   info - The variable name 'State' isn't a lowerCamelCase identifier - lib\ui\screens\template_maker_screen.dart:508:32 - non_constant_identifier_names
+  error - Methods must have an explicit list of parameters - lib\ui\screens\template_maker_screen.dart:508:32 - missing_method_parameters
+   info - The local variable '_transformController' starts with an underscore - lib\ui\screens\template_maker_screen.dart:509:34 - no_leading_underscores_for_local_identifiers
+   info - The local variable '_resetZoom' starts with an underscore - lib\ui\screens\template_maker_screen.dart:512:8 - no_leading_underscores_for_local_identifiers
+warning - The declaration 'dispose' isn't referenced - lib\ui\screens\template_maker_screen.dart:517:8 - unused_element
+  error - The method 'dispose' isn't defined in a superclass of 'TemplateMakerScreen' - lib\ui\screens\template_maker_screen.dart:519:11 - undefined_super_member
+warning - The declaration 'build' isn't referenced - lib\ui\screens\template_maker_screen.dart:523:10 - unused_element
+  error - Local variable '_buildBackground' can't be referenced before it is declared - lib\ui\screens\template_maker_screen.dart:596:37 - referenced_before_declaration
+   info - The local variable '_buildBackground' starts with an underscore - lib\ui\screens\template_maker_screen.dart:625:10 - no_leading_underscores_for_local_identifiers
+  error - Classes can't be declared inside other classes - lib\ui\screens\template_maker_screen.dart:683:1 - class_in_class
+  error - Expected a class member - lib\ui\screens\template_maker_screen.dart:683:20 - expected_class_member
+   info - The variable name 'StatefulWidget' isn't a lowerCamelCase identifier - lib\ui\screens\template_maker_screen.dart:683:28 - non_constant_identifier_names
+  error - Methods must have an explicit list of parameters - lib\ui\screens\template_maker_screen.dart:683:28 - missing_method_parameters
+  error - The name 'StatefulWidget' is already defined - lib\ui\screens\template_maker_screen.dart:683:28 - duplicate_definition
+  error - State isn't a type - lib\ui\screens\template_maker_screen.dart:685:3 - not_a_type
+  error - The name '_EditorPanel' isn't a type, so it can't be used as a type argument - lib\ui\screens\template_maker_screen.dart:685:9 - non_type_as_type_argument
+warning - The declaration 'createState' isn't referenced - lib\ui\screens\template_maker_screen.dart:685:23 - unused_element
+  error - The method '_EditorPanelState' isn't defined for the type 'TemplateMakerScreen' - lib\ui\screens\template_maker_screen.dart:685:40 - undefined_method
+  error - Classes can't be declared inside other classes - lib\ui\screens\template_maker_screen.dart:688:1 - class_in_class
+  error - Expected a class member - lib\ui\screens\template_maker_screen.dart:688:25 - expected_class_member
+   info - The variable name 'State' isn't a lowerCamelCase identifier - lib\ui\screens\template_maker_screen.dart:688:33 - non_constant_identifier_names
+  error - Methods must have an explicit list of parameters - lib\ui\screens\template_maker_screen.dart:688:33 - missing_method_parameters
+  error - The name 'State' is already defined - lib\ui\screens\template_maker_screen.dart:688:33 - duplicate_definition
+  error - A function body must be provided - lib\ui\screens\template_maker_screen.dart:689:5 - missing_function_body
+  error - Expected a class member - lib\ui\screens\template_maker_screen.dart:689:5 - expected_class_member
+   info - The variable name 'SingleTickerProviderStateMixin' isn't a lowerCamelCase identifier - lib\ui\screens\template_maker_screen.dart:689:10 - non_constant_identifier_names
+  error - Methods must have an explicit list of parameters - lib\ui\screens\template_maker_screen.dart:689:10 - missing_method_parameters
+   info - The local variable '_tabController' starts with an underscore - lib\ui\screens\template_maker_screen.dart:690:28 - no_leading_underscores_for_local_identifiers
+warning - The declaration 'initState' isn't referenced - lib\ui\screens\template_maker_screen.dart:693:8 - unused_element
+  error - The method 'initState' isn't defined in a superclass of 'TemplateMakerScreen' - lib\ui\screens\template_maker_screen.dart:694:11 - undefined_super_member
+  error - The argument type 'TemplateMakerScreen' can't be assigned to the parameter type 'TickerProvider'.  - lib\ui\screens\template_maker_screen.dart:695:54 - argument_type_not_assignable
+warning - The declaration 'dispose' isn't referenced - lib\ui\screens\template_maker_screen.dart:699:8 - unused_element
+  error - The method 'dispose' isn't defined in a superclass of 'TemplateMakerScreen' - lib\ui\screens\template_maker_screen.dart:701:11 - undefined_super_member
+warning - The declaration 'build' isn't referenced - lib\ui\screens\template_maker_screen.dart:705:10 - unused_element
+  error - The method '_TextEditTab' isn't defined for the type 'TemplateMakerScreen' - lib\ui\screens\template_maker_screen.dart:799:27 - undefined_method
+  error - The name '_DisabledTab' isn't a class - lib\ui\screens\template_maker_screen.dart:800:33 - creation_with_non_type
+  error - The method '_ImageEditTab' isn't defined for the type 'TemplateMakerScreen' - lib\ui\screens\template_maker_screen.dart:805:27 - undefined_method
+  error - The name '_DisabledTab' isn't a class - lib\ui\screens\template_maker_screen.dart:806:33 - creation_with_non_type
+  error - The method '_LayerEditTab' isn't defined for the type 'TemplateMakerScreen' - lib\ui\screens\template_maker_screen.dart:810:21 - undefined_method
+  error - Classes can't be declared inside other classes - lib\ui\screens\template_maker_screen.dart:822:1 - class_in_class
+  error - Expected a class member - lib\ui\screens\template_maker_screen.dart:822:20 - expected_class_member
+   info - The variable name 'StatelessWidget' isn't a lowerCamelCase identifier - lib\ui\screens\template_maker_screen.dart:822:28 - non_constant_identifier_names
+  error - Methods must have an explicit list of parameters - lib\ui\screens\template_maker_screen.dart:822:28 - missing_method_parameters
+  error - The name '_DisabledTab' isn't a class - lib\ui\screens\template_maker_screen.dart:825:9 - creation_with_non_type
+  error - Expected to find ',' - lib\ui\screens\template_maker_screen.dart:825:32 - expected_token
+  error - The getter 'message' isn't defined for the type 'TemplateMakerScreen' - lib\ui\screens\template_maker_screen.dart:825:37 - undefined_getter
+warning - The declaration 'build' isn't referenced - lib\ui\screens\template_maker_screen.dart:828:10 - unused_element
+  error - The final variable 'message' can't be read because it's potentially unassigned at this point - lib\ui\screens\template_maker_screen.dart:830:7 - read_potentially_unassigned_final
+  error - Classes can't be declared inside other classes - lib\ui\screens\template_maker_screen.dart:841:1 - class_in_class
+  error - Expected a class member - lib\ui\screens\template_maker_screen.dart:841:20 - expected_class_member
+   info - The variable name 'StatefulWidget' isn't a lowerCamelCase identifier - lib\ui\screens\template_maker_screen.dart:841:28 - non_constant_identifier_names
+  error - Methods must have an explicit list of parameters - lib\ui\screens\template_maker_screen.dart:841:28 - missing_method_parameters
+  error - The name 'StatefulWidget' is already defined - lib\ui\screens\template_maker_screen.dart:841:28 - duplicate_definition
+warning - The value of the local variable 'layer' isn't used - lib\ui\screens\template_maker_screen.dart:842:20 - unused_local_variable
+warning - The value of the local variable 'provider' isn't used - lib\ui\screens\template_maker_screen.dart:843:32 - unused_local_variable
+  error - The name '_TextEditTab' isn't a class - lib\ui\screens\template_maker_screen.dart:845:9 - creation_with_non_type
+  error - Expected to find ',' - lib\ui\screens\template_maker_screen.dart:845:32 - expected_token
+  error - The getter 'layer' isn't defined for the type 'TemplateMakerScreen' - lib\ui\screens\template_maker_screen.dart:845:37 - undefined_getter
+  error - Expected to find ',' - lib\ui\screens\template_maker_screen.dart:845:53 - expected_token
+  error - The getter 'provider' isn't defined for the type 'TemplateMakerScreen' - lib\ui\screens\template_maker_screen.dart:845:58 - undefined_getter
+  error - State isn't a type - lib\ui\screens\template_maker_screen.dart:848:3 - not_a_type
+  error - The name '_TextEditTab' isn't a type, so it can't be used as a type argument - lib\ui\screens\template_maker_screen.dart:848:9 - non_type_as_type_argument
+warning - The declaration 'createState' isn't referenced - lib\ui\screens\template_maker_screen.dart:848:23 - unused_element
+  error - The method '_TextEditTabState' isn't defined for the type 'TemplateMakerScreen' - lib\ui\screens\template_maker_screen.dart:848:40 - undefined_method
+  error - Classes can't be declared inside other classes - lib\ui\screens\template_maker_screen.dart:851:1 - class_in_class
+  error - Expected a class member - lib\ui\screens\template_maker_screen.dart:851:25 - expected_class_member
+   info - The variable name 'State' isn't a lowerCamelCase identifier - lib\ui\screens\template_maker_screen.dart:851:33 - non_constant_identifier_names
+  error - Methods must have an explicit list of parameters - lib\ui\screens\template_maker_screen.dart:851:33 - missing_method_parameters
+  error - The name 'State' is already defined - lib\ui\screens\template_maker_screen.dart:851:33 - duplicate_definition
+   info - The local variable '_textCtrl' starts with an underscore - lib\ui\screens\template_maker_screen.dart:852:36 - no_leading_underscores_for_local_identifiers
+   info - The local variable '_fontSize' starts with an underscore - lib\ui\screens\template_maker_screen.dart:853:15 - no_leading_underscores_for_local_identifiers
+   info - The local variable '_selectedFont' starts with an underscore - lib\ui\screens\template_maker_screen.dart:854:15 - no_leading_underscores_for_local_identifiers
+warning - The declaration 'initState' isn't referenced - lib\ui\screens\template_maker_screen.dart:857:8 - unused_element
+  error - The method 'initState' isn't defined in a superclass of 'TemplateMakerScreen' - lib\ui\screens\template_maker_screen.dart:858:11 - undefined_super_member
+  error - Undefined name 'widget' - lib\ui\screens\template_maker_screen.dart:859:45 - undefined_identifier
+  error - Undefined name 'widget' - lib\ui\screens\template_maker_screen.dart:860:17 - undefined_identifier
+  error - Undefined name 'widget' - lib\ui\screens\template_maker_screen.dart:861:21 - undefined_identifier
+warning - The declaration 'didUpdateWidget' isn't referenced - lib\ui\screens\template_maker_screen.dart:865:8 - unused_element
+  error - The method 'didUpdateWidget' isn't defined in a superclass of 'TemplateMakerScreen' - lib\ui\screens\template_maker_screen.dart:866:11 - undefined_super_member
+  error - The property 'layer' can't be unconditionally accessed because the receiver can be 'null' - lib\ui\screens\template_maker_screen.dart:867:19 - unchecked_use_of_nullable_value
+  error - Undefined name 'widget' - lib\ui\screens\template_maker_screen.dart:867:31 - undefined_identifier
+  error - Undefined name 'widget' - lib\ui\screens\template_maker_screen.dart:868:24 - undefined_identifier
+  error - Undefined name 'widget' - lib\ui\screens\template_maker_screen.dart:869:19 - undefined_identifier
+  error - Undefined name 'widget' - lib\ui\screens\template_maker_screen.dart:870:23 - undefined_identifier
+warning - The declaration 'dispose' isn't referenced - lib\ui\screens\template_maker_screen.dart:875:8 - unused_element
+  error - The method 'dispose' isn't defined in a superclass of 'TemplateMakerScreen' - lib\ui\screens\template_maker_screen.dart:877:11 - undefined_super_member
+warning - The declaration 'build' isn't referenced - lib\ui\screens\template_maker_screen.dart:881:10 - unused_element
+  error - Undefined name 'widget' - lib\ui\screens\template_maker_screen.dart:902:17 - undefined_identifier
+  error - Undefined name 'widget' - lib\ui\screens\template_maker_screen.dart:902:49 - undefined_identifier
+  error - The method 'setState' isn't defined for the type 'TemplateMakerScreen' - lib\ui\screens\template_maker_screen.dart:917:21 - undefined_method
+  error - Undefined name 'widget' - lib\ui\screens\template_maker_screen.dart:918:21 - undefined_identifier
+  error - Undefined name 'widget' - lib\ui\screens\template_maker_screen.dart:918:57 - undefined_identifier
+  error - The method '_ColorButton' isn't defined for the type 'TemplateMakerScreen' - lib\ui\screens\template_maker_screen.dart:936:15 - undefined_method
+  error - Undefined name 'widget' - lib\ui\screens\template_maker_screen.dart:937:24 - undefined_identifier
+  error - Undefined name 'widget' - lib\ui\screens\template_maker_screen.dart:939:21 - undefined_identifier
+  error - Undefined name 'widget' - lib\ui\screens\template_maker_screen.dart:939:54 - undefined_identifier
+  error - The method '_AlignButtons' isn't defined for the type 'TemplateMakerScreen' - lib\ui\screens\template_maker_screen.dart:944:15 - undefined_method
+  error - Undefined name 'widget' - lib\ui\screens\template_maker_screen.dart:944:36 - undefined_identifier
+  error - Undefined name 'widget' - lib\ui\screens\template_maker_screen.dart:944:60 - undefined_identifier
+  error - The method '_VerticalAlignButtons' isn't defined for the type 'TemplateMakerScreen' - lib\ui\screens\template_maker_screen.dart:946:15 - undefined_method
+  error - Undefined name 'widget' - lib\ui\screens\template_maker_screen.dart:947:24 - undefined_identifier
+  error - Undefined name 'widget' - lib\ui\screens\template_maker_screen.dart:948:27 - undefined_identifier
+  error - Undefined name 'widget' - lib\ui\screens\template_maker_screen.dart:962:24 - undefined_identifier
+  error - Undefined name 'widget' - lib\ui\screens\template_maker_screen.dart:964:35 - undefined_identifier
+  error - Undefined name 'widget' - lib\ui\screens\template_maker_screen.dart:965:19 - undefined_identifier
+  error - The method 'setState' isn't defined for the type 'TemplateMakerScreen' - lib\ui\screens\template_maker_screen.dart:989:21 - undefined_method
+  error - Undefined name 'widget' - lib\ui\screens\template_maker_screen.dart:990:21 - undefined_identifier
+  error - Undefined name 'widget' - lib\ui\screens\template_maker_screen.dart:991:23 - undefined_identifier
+  error - The method '_ShadowControls' isn't defined for the type 'TemplateMakerScreen' - lib\ui\screens\template_maker_screen.dart:1028:11 - undefined_method
+  error - Undefined name 'widget' - lib\ui\screens\template_maker_screen.dart:1028:34 - undefined_identifier
+  error - Undefined name 'widget' - lib\ui\screens\template_maker_screen.dart:1028:58 - undefined_identifier
+  error - The method '_StrokeControls' isn't defined for the type 'TemplateMakerScreen' - lib\ui\screens\template_maker_screen.dart:1035:11 - undefined_method
+  error - Undefined name 'widget' - lib\ui\screens\template_maker_screen.dart:1035:34 - undefined_identifier
+  error - Undefined name 'widget' - lib\ui\screens\template_maker_screen.dart:1035:58 - undefined_identifier
+  error - Classes can't be declared inside other classes - lib\ui\screens\template_maker_screen.dart:1046:1 - class_in_class
+  error - Expected a class member - lib\ui\screens\template_maker_screen.dart:1046:21 - expected_class_member
+   info - The variable name 'StatefulWidget' isn't a lowerCamelCase identifier - lib\ui\screens\template_maker_screen.dart:1046:29 - non_constant_identifier_names
+  error - Methods must have an explicit list of parameters - lib\ui\screens\template_maker_screen.dart:1046:29 - missing_method_parameters
+  error - The name 'StatefulWidget' is already defined - lib\ui\screens\template_maker_screen.dart:1046:29 - duplicate_definition
+warning - The value of the local variable 'layer' isn't used - lib\ui\screens\template_maker_screen.dart:1047:20 - unused_local_variable
+warning - The value of the local variable 'provider' isn't used - lib\ui\screens\template_maker_screen.dart:1048:32 - unused_local_variable
+  error - The name '_ImageEditTab' isn't a class - lib\ui\screens\template_maker_screen.dart:1050:9 - creation_with_non_type
+  error - Expected to find ',' - lib\ui\screens\template_maker_screen.dart:1050:33 - expected_token
+  error - The getter 'layer' isn't defined for the type 'TemplateMakerScreen' - lib\ui\screens\template_maker_screen.dart:1050:38 - undefined_getter
+  error - Expected to find ',' - lib\ui\screens\template_maker_screen.dart:1050:54 - expected_token
+  error - The getter 'provider' isn't defined for the type 'TemplateMakerScreen' - lib\ui\screens\template_maker_screen.dart:1050:59 - undefined_getter
+  error - State isn't a type - lib\ui\screens\template_maker_screen.dart:1053:3 - not_a_type
+  error - The name '_ImageEditTab' isn't a type, so it can't be used as a type argument - lib\ui\screens\template_maker_screen.dart:1053:9 - non_type_as_type_argument
+warning - The declaration 'createState' isn't referenced - lib\ui\screens\template_maker_screen.dart:1053:24 - unused_element
+  error - The method '_ImageEditTabState' isn't defined for the type 'TemplateMakerScreen' - lib\ui\screens\template_maker_screen.dart:1053:41 - undefined_method
+  error - Classes can't be declared inside other classes - lib\ui\screens\template_maker_screen.dart:1056:1 - class_in_class
+  error - Expected a class member - lib\ui\screens\template_maker_screen.dart:1056:26 - expected_class_member
+   info - The variable name 'State' isn't a lowerCamelCase identifier - lib\ui\screens\template_maker_screen.dart:1056:34 - non_constant_identifier_names
+  error - Methods must have an explicit list of parameters - lib\ui\screens\template_maker_screen.dart:1056:34 - missing_method_parameters
+  error - The name 'State' is already defined - lib\ui\screens\template_maker_screen.dart:1056:34 - duplicate_definition
+   info - The local variable '_borderRadius' starts with an underscore - lib\ui\screens\template_maker_screen.dart:1057:15 - no_leading_underscores_for_local_identifiers
+warning - The declaration 'initState' isn't referenced - lib\ui\screens\template_maker_screen.dart:1060:8 - unused_element
+  error - The method 'initState' isn't defined in a superclass of 'TemplateMakerScreen' - lib\ui\screens\template_maker_screen.dart:1061:11 - undefined_super_member
+  error - Undefined name 'widget' - lib\ui\screens\template_maker_screen.dart:1062:21 - undefined_identifier
+warning - The declaration 'build' isn't referenced - lib\ui\screens\template_maker_screen.dart:1066:10 - unused_element
+  error - Undefined name 'widget' - lib\ui\screens\template_maker_screen.dart:1088:17 - undefined_identifier
+  error - Undefined name 'widget' - lib\ui\screens\template_maker_screen.dart:1088:54 - undefined_identifier
+  error - The method 'setState' isn't defined for the type 'TemplateMakerScreen' - lib\ui\screens\template_maker_screen.dart:1106:21 - undefined_method
+  error - Undefined name 'widget' - lib\ui\screens\template_maker_screen.dart:1107:21 - undefined_identifier
+  error - Undefined name 'widget' - lib\ui\screens\template_maker_screen.dart:1108:23 - undefined_identifier
+  error - The method '_ColorButton' isn't defined for the type 'TemplateMakerScreen' - lib\ui\screens\template_maker_screen.dart:1125:15 - undefined_method
+  error - Undefined name 'widget' - lib\ui\screens\template_maker_screen.dart:1126:24 - undefined_identifier
+  error - Undefined name 'widget' - lib\ui\screens\template_maker_screen.dart:1127:32 - undefined_identifier
+  error - Undefined name 'widget' - lib\ui\screens\template_maker_screen.dart:1128:19 - undefined_identifier
+  error - Undefined name 'widget' - lib\ui\screens\template_maker_screen.dart:1130:33 - undefined_identifier
+  error - Undefined name 'widget' - lib\ui\screens\template_maker_screen.dart:1132:25 - undefined_identifier
+  error - Classes can't be declared inside other classes - lib\ui\screens\template_maker_screen.dart:1147:1 - class_in_class
+  error - Expected a class member - lib\ui\screens\template_maker_screen.dart:1147:21 - expected_class_member
+   info - The variable name 'StatefulWidget' isn't a lowerCamelCase identifier - lib\ui\screens\template_maker_screen.dart:1147:29 - non_constant_identifier_names
+  error - Methods must have an explicit list of parameters - lib\ui\screens\template_maker_screen.dart:1147:29 - missing_method_parameters
+  error - The name 'StatefulWidget' is already defined - lib\ui\screens\template_maker_screen.dart:1147:29 - duplicate_definition
+warning - The value of the local variable 'layer' isn't used - lib\ui\screens\template_maker_screen.dart:1148:20 - unused_local_variable
+warning - The value of the local variable 'provider' isn't used - lib\ui\screens\template_maker_screen.dart:1149:32 - unused_local_variable
+  error - The name '_LayerEditTab' isn't a class - lib\ui\screens\template_maker_screen.dart:1151:9 - creation_with_non_type
+  error - Expected to find ',' - lib\ui\screens\template_maker_screen.dart:1151:33 - expected_token
+  error - The getter 'layer' isn't defined for the type 'TemplateMakerScreen' - lib\ui\screens\template_maker_screen.dart:1151:38 - undefined_getter
+  error - Expected to find ',' - lib\ui\screens\template_maker_screen.dart:1151:54 - expected_token
+  error - The getter 'provider' isn't defined for the type 'TemplateMakerScreen' - lib\ui\screens\template_maker_screen.dart:1151:59 - undefined_getter
+  error - State isn't a type - lib\ui\screens\template_maker_screen.dart:1154:3 - not_a_type
+  error - The name '_LayerEditTab' isn't a type, so it can't be used as a type argument - lib\ui\screens\template_maker_screen.dart:1154:9 - non_type_as_type_argument
+warning - The declaration 'createState' isn't referenced - lib\ui\screens\template_maker_screen.dart:1154:24 - unused_element
+  error - The method '_LayerEditTabState' isn't defined for the type 'TemplateMakerScreen' - lib\ui\screens\template_maker_screen.dart:1154:41 - undefined_method
+  error - Classes can't be declared inside other classes - lib\ui\screens\template_maker_screen.dart:1157:1 - class_in_class
+  error - Expected a class member - lib\ui\screens\template_maker_screen.dart:1157:26 - expected_class_member
+   info - The variable name 'State' isn't a lowerCamelCase identifier - lib\ui\screens\template_maker_screen.dart:1157:34 - non_constant_identifier_names
+  error - Methods must have an explicit list of parameters - lib\ui\screens\template_maker_screen.dart:1157:34 - missing_method_parameters
+  error - The name 'State' is already defined - lib\ui\screens\template_maker_screen.dart:1157:34 - duplicate_definition
+   info - The local variable '_width' starts with an underscore - lib\ui\screens\template_maker_screen.dart:1158:15 - no_leading_underscores_for_local_identifiers
+   info - The local variable '_height' starts with an underscore - lib\ui\screens\template_maker_screen.dart:1159:15 - no_leading_underscores_for_local_identifiers
+warning - The declaration 'initState' isn't referenced - lib\ui\screens\template_maker_screen.dart:1162:8 - unused_element
+  error - The method 'initState' isn't defined in a superclass of 'TemplateMakerScreen' - lib\ui\screens\template_maker_screen.dart:1163:11 - undefined_super_member
+  error - Undefined name 'widget' - lib\ui\screens\template_maker_screen.dart:1164:14 - undefined_identifier
+  error - Undefined name 'widget' - lib\ui\screens\template_maker_screen.dart:1165:15 - undefined_identifier
+warning - The declaration 'didUpdateWidget' isn't referenced - lib\ui\screens\template_maker_screen.dart:1169:8 - unused_element
+  error - The method 'didUpdateWidget' isn't defined in a superclass of 'TemplateMakerScreen' - lib\ui\screens\template_maker_screen.dart:1170:11 - undefined_super_member
+  error - The property 'layer' can't be unconditionally accessed because the receiver can be 'null' - lib\ui\screens\template_maker_screen.dart:1171:19 - unchecked_use_of_nullable_value
+  error - Undefined name 'widget' - lib\ui\screens\template_maker_screen.dart:1171:31 - undefined_identifier
+  error - Undefined name 'widget' - lib\ui\screens\template_maker_screen.dart:1172:16 - undefined_identifier
+  error - Undefined name 'widget' - lib\ui\screens\template_maker_screen.dart:1173:17 - undefined_identifier
+   info - The local variable '_nudge' starts with an underscore - lib\ui\screens\template_maker_screen.dart:1177:8 - no_leading_underscores_for_local_identifiers
+  error - Undefined name 'widget' - lib\ui\screens\template_maker_screen.dart:1178:5 - undefined_identifier
+  error - Undefined name 'widget' - lib\ui\screens\template_maker_screen.dart:1178:41 - undefined_identifier
+warning - The declaration 'build' isn't referenced - lib\ui\screens\template_maker_screen.dart:1182:10 - unused_element
+  error - Undefined name 'widget' - lib\ui\screens\template_maker_screen.dart:1183:19 - undefined_identifier
+  error - Undefined name 'widget' - lib\ui\screens\template_maker_screen.dart:1184:22 - undefined_identifier
+  error - Local variable '_iconBtn' can't be referenced before it is declared - lib\ui\screens\template_maker_screen.dart:1212:15 - referenced_before_declaration
+  error - Local variable '_iconBtn' can't be referenced before it is declared - lib\ui\screens\template_maker_screen.dart:1217:15 - referenced_before_declaration
+  error - Local variable '_iconBtn' can't be referenced before it is declared - lib\ui\screens\template_maker_screen.dart:1222:15 - referenced_before_declaration
+  error - Local variable '_iconBtn' can't be referenced before it is declared - lib\ui\screens\template_maker_screen.dart:1227:15 - referenced_before_declaration
+  error - Local variable '_nudgeBtn' can't be referenced before it is declared - lib\ui\screens\template_maker_screen.dart:1252:15 - referenced_before_declaration
+  error - Local variable '_nudgeBtn' can't be referenced before it is declared - lib\ui\screens\template_maker_screen.dart:1260:19 - referenced_before_declaration
+  error - Local variable '_nudgeBtn' can't be referenced before it is declared - lib\ui\screens\template_maker_screen.dart:1285:19 - referenced_before_declaration
+  error - Local variable '_nudgeBtn' can't be referenced before it is declared - lib\ui\screens\template_maker_screen.dart:1293:15 - referenced_before_declaration
+  error - The method 'setState' isn't defined for the type 'TemplateMakerScreen' - lib\ui\screens\template_maker_screen.dart:1327:21 - undefined_method
+  error - The method 'setState' isn't defined for the type 'TemplateMakerScreen' - lib\ui\screens\template_maker_screen.dart:1355:21 - undefined_method
+   info - The local variable '_nudgeBtn' starts with an underscore - lib\ui\screens\template_maker_screen.dart:1375:10 - no_leading_underscores_for_local_identifiers
+   info - The local variable '_iconBtn' starts with an underscore - lib\ui\screens\template_maker_screen.dart:1395:10 - no_leading_underscores_for_local_identifiers
+  error - Classes can't be declared inside other classes - lib\ui\screens\template_maker_screen.dart:1419:1 - class_in_class
+  error - Expected a class member - lib\ui\screens\template_maker_screen.dart:1419:20 - expected_class_member
+   info - The variable name 'StatelessWidget' isn't a lowerCamelCase identifier - lib\ui\screens\template_maker_screen.dart:1419:28 - non_constant_identifier_names
+  error - Methods must have an explicit list of parameters - lib\ui\screens\template_maker_screen.dart:1419:28 - missing_method_parameters
+  error - The name 'StatelessWidget' is already defined - lib\ui\screens\template_maker_screen.dart:1419:28 - duplicate_definition
+  error - The name '_ColorButton' isn't a class - lib\ui\screens\template_maker_screen.dart:1423:9 - creation_with_non_type
+  error - Expected to find ',' - lib\ui\screens\template_maker_screen.dart:1423:32 - expected_token
+  error - The getter 'color' isn't defined for the type 'TemplateMakerScreen' - lib\ui\screens\template_maker_screen.dart:1423:37 - undefined_getter
+  error - Expected to find ',' - lib\ui\screens\template_maker_screen.dart:1423:53 - expected_token
+  error - The getter 'onPick' isn't defined for the type 'TemplateMakerScreen' - lib\ui\screens\template_maker_screen.dart:1423:58 - undefined_getter
+  error - Can't have modifier 'static' here - lib\ui\screens\template_maker_screen.dart:1425:3 - extraneous_modifier
+   info - The local variable '_palette' starts with an underscore - lib\ui\screens\template_maker_screen.dart:1425:28 - no_leading_underscores_for_local_identifiers
+warning - The declaration 'build' isn't referenced - lib\ui\screens\template_maker_screen.dart:1449:10 - unused_element
+  error - Local variable '_showColorPicker' can't be referenced before it is declared - lib\ui\screens\template_maker_screen.dart:1451:20 - referenced_before_declaration
+  error - The final variable 'color' can't be read because it's potentially unassigned at this point - lib\ui\screens\template_maker_screen.dart:1456:18 - read_potentially_unassigned_final
+   info - The local variable '_showColorPicker' starts with an underscore - lib\ui\screens\template_maker_screen.dart:1464:8 - no_leading_underscores_for_local_identifiers
+  error - The final variable 'onPick' can't be read because it's potentially unassigned at this point - lib\ui\screens\template_maker_screen.dart:1479:19 - read_potentially_unassigned_final
+  error - The final variable 'color' can't be read because it's potentially unassigned at this point - lib\ui\screens\template_maker_screen.dart:1487:35 - read_potentially_unassigned_final
+  error - The final variable 'color' can't be read because it's potentially unassigned at this point - lib\ui\screens\template_maker_screen.dart:1488:35 - read_potentially_unassigned_final
+  error - Classes can't be declared inside other classes - lib\ui\screens\template_maker_screen.dart:1502:1 - class_in_class
+  error - Expected a class member - lib\ui\screens\template_maker_screen.dart:1502:21 - expected_class_member
+   info - The variable name 'StatelessWidget' isn't a lowerCamelCase identifier - lib\ui\screens\template_maker_screen.dart:1502:29 - non_constant_identifier_names
+  error - Methods must have an explicit list of parameters - lib\ui\screens\template_maker_screen.dart:1502:29 - missing_method_parameters
+  error - The name 'StatelessWidget' is already defined - lib\ui\screens\template_maker_screen.dart:1502:29 - duplicate_definition
+  error - The name '_AlignButtons' isn't a class - lib\ui\screens\template_maker_screen.dart:1506:9 - creation_with_non_type
+  error - Expected to find ',' - lib\ui\screens\template_maker_screen.dart:1506:33 - expected_token
+  error - The getter 'layer' isn't defined for the type 'TemplateMakerScreen' - lib\ui\screens\template_maker_screen.dart:1506:38 - undefined_getter
+  error - Expected to find ',' - lib\ui\screens\template_maker_screen.dart:1506:54 - expected_token
+  error - The getter 'provider' isn't defined for the type 'TemplateMakerScreen' - lib\ui\screens\template_maker_screen.dart:1506:59 - undefined_getter
+warning - The declaration 'build' isn't referenced - lib\ui\screens\template_maker_screen.dart:1509:10 - unused_element
+  error - Local variable '_btn' can't be referenced before it is declared - lib\ui\screens\template_maker_screen.dart:1513:9 - referenced_before_declaration
+  error - Local variable '_btn' can't be referenced before it is declared - lib\ui\screens\template_maker_screen.dart:1514:9 - referenced_before_declaration
+  error - Local variable '_btn' can't be referenced before it is declared - lib\ui\screens\template_maker_screen.dart:1515:9 - referenced_before_declaration
+   info - The local variable '_btn' starts with an underscore - lib\ui\screens\template_maker_screen.dart:1520:10 - no_leading_underscores_for_local_identifiers
+  error - The final variable 'layer' can't be read because it's potentially unassigned at this point - lib\ui\screens\template_maker_screen.dart:1521:23 - read_potentially_unassigned_final
+  error - The final variable 'provider' can't be read because it's potentially unassigned at this point - lib\ui\screens\template_maker_screen.dart:1523:20 - read_potentially_unassigned_final
+  error - The final variable 'layer' can't be read because it's potentially unassigned at this point - lib\ui\screens\template_maker_screen.dart:1523:50 - read_potentially_unassigned_final
+  error - Classes can't be declared inside other classes - lib\ui\screens\template_maker_screen.dart:1542:1 - class_in_class
+  error - Expected a class member - lib\ui\screens\template_maker_screen.dart:1542:29 - expected_class_member
+   info - The variable name 'StatelessWidget' isn't a lowerCamelCase identifier - lib\ui\screens\template_maker_screen.dart:1542:37 - non_constant_identifier_names
+  error - Methods must have an explicit list of parameters - lib\ui\screens\template_maker_screen.dart:1542:37 - missing_method_parameters
+  error - The name 'StatelessWidget' is already defined - lib\ui\screens\template_maker_screen.dart:1542:37 - duplicate_definition
+  error - The name '_VerticalAlignButtons' isn't a class - lib\ui\screens\template_maker_screen.dart:1546:9 - creation_with_non_type
+  error - Expected to find ',' - lib\ui\screens\template_maker_screen.dart:1546:41 - expected_token
+  error - The getter 'layer' isn't defined for the type 'TemplateMakerScreen' - lib\ui\screens\template_maker_screen.dart:1546:46 - undefined_getter
+  error - Expected to find ',' - lib\ui\screens\template_maker_screen.dart:1546:62 - expected_token
+  error - The getter 'provider' isn't defined for the type 'TemplateMakerScreen' - lib\ui\screens\template_maker_screen.dart:1546:67 - undefined_getter
+warning - The declaration 'build' isn't referenced - lib\ui\screens\template_maker_screen.dart:1549:10 - unused_element
+  error - Local variable '_btn' can't be referenced before it is declared - lib\ui\screens\template_maker_screen.dart:1553:9 - referenced_before_declaration
+  error - Local variable '_btn' can't be referenced before it is declared - lib\ui\screens\template_maker_screen.dart:1554:9 - referenced_before_declaration
+  error - Local variable '_btn' can't be referenced before it is declared - lib\ui\screens\template_maker_screen.dart:1555:9 - referenced_before_declaration
+   info - The local variable '_btn' starts with an underscore - lib\ui\screens\template_maker_screen.dart:1560:10 - no_leading_underscores_for_local_identifiers
+  error - The final variable 'layer' can't be read because it's potentially unassigned at this point - lib\ui\screens\template_maker_screen.dart:1562:23 - read_potentially_unassigned_final
+  error - The final variable 'provider' can't be read because it's potentially unassigned at this point - lib\ui\screens\template_maker_screen.dart:1564:20 - read_potentially_unassigned_final
+  error - The final variable 'layer' can't be read because it's potentially unassigned at this point - lib\ui\screens\template_maker_screen.dart:1564:54 - read_potentially_unassigned_final
+  error - Classes can't be declared inside other classes - lib\ui\screens\template_maker_screen.dart:1583:1 - class_in_class
+  error - Expected a class member - lib\ui\screens\template_maker_screen.dart:1583:23 - expected_class_member
+   info - The variable name 'StatefulWidget' isn't a lowerCamelCase identifier - lib\ui\screens\template_maker_screen.dart:1583:31 - non_constant_identifier_names
+  error - Methods must have an explicit list of parameters - lib\ui\screens\template_maker_screen.dart:1583:31 - missing_method_parameters
+  error - The name 'StatefulWidget' is already defined - lib\ui\screens\template_maker_screen.dart:1583:31 - duplicate_definition
+warning - The value of the local variable 'layer' isn't used - lib\ui\screens\template_maker_screen.dart:1584:20 - unused_local_variable
+warning - The value of the local variable 'provider' isn't used - lib\ui\screens\template_maker_screen.dart:1585:32 - unused_local_variable
+  error - The name '_ShadowControls' isn't a class - lib\ui\screens\template_maker_screen.dart:1587:9 - creation_with_non_type
+  error - Expected to find ',' - lib\ui\screens\template_maker_screen.dart:1587:35 - expected_token
+  error - The getter 'layer' isn't defined for the type 'TemplateMakerScreen' - lib\ui\screens\template_maker_screen.dart:1587:40 - undefined_getter
+  error - Expected to find ',' - lib\ui\screens\template_maker_screen.dart:1587:56 - expected_token
+  error - The getter 'provider' isn't defined for the type 'TemplateMakerScreen' - lib\ui\screens\template_maker_screen.dart:1587:61 - undefined_getter
+  error - State isn't a type - lib\ui\screens\template_maker_screen.dart:1590:3 - not_a_type
+  error - The name '_ShadowControls' isn't a type, so it can't be used as a type argument - lib\ui\screens\template_maker_screen.dart:1590:9 - non_type_as_type_argument
+warning - The declaration 'createState' isn't referenced - lib\ui\screens\template_maker_screen.dart:1590:26 - unused_element
+  error - The method '_ShadowControlsState' isn't defined for the type 'TemplateMakerScreen' - lib\ui\screens\template_maker_screen.dart:1590:43 - undefined_method
+  error - Classes can't be declared inside other classes - lib\ui\screens\template_maker_screen.dart:1593:1 - class_in_class
+  error - Expected a class member - lib\ui\screens\template_maker_screen.dart:1593:28 - expected_class_member
+   info - The variable name 'State' isn't a lowerCamelCase identifier - lib\ui\screens\template_maker_screen.dart:1593:36 - non_constant_identifier_names
+  error - Methods must have an explicit list of parameters - lib\ui\screens\template_maker_screen.dart:1593:36 - missing_method_parameters
+  error - The name 'State' is already defined - lib\ui\screens\template_maker_screen.dart:1593:36 - duplicate_definition
+   info - The local variable '_blur' starts with an underscore - lib\ui\screens\template_maker_screen.dart:1594:15 - no_leading_underscores_for_local_identifiers
+   info - The local variable '_ox' starts with an underscore - lib\ui\screens\template_maker_screen.dart:1595:15 - no_leading_underscores_for_local_identifiers
+   info - The local variable '_oy' starts with an underscore - lib\ui\screens\template_maker_screen.dart:1596:15 - no_leading_underscores_for_local_identifiers
+   info - The local variable '_color' starts with an underscore - lib\ui\screens\template_maker_screen.dart:1597:14 - no_leading_underscores_for_local_identifiers
+warning - The declaration 'initState' isn't referenced - lib\ui\screens\template_maker_screen.dart:1600:8 - unused_element
+  error - The method 'initState' isn't defined in a superclass of 'TemplateMakerScreen' - lib\ui\screens\template_maker_screen.dart:1601:11 - undefined_super_member
+  error - Undefined name 'widget' - lib\ui\screens\template_maker_screen.dart:1602:13 - undefined_identifier
+  error - Undefined name 'widget' - lib\ui\screens\template_maker_screen.dart:1603:11 - undefined_identifier
+  error - Undefined name 'widget' - lib\ui\screens\template_maker_screen.dart:1604:11 - undefined_identifier
+  error - Undefined name 'widget' - lib\ui\screens\template_maker_screen.dart:1605:14 - undefined_identifier
+   info - The local variable '_apply' starts with an underscore - lib\ui\screens\template_maker_screen.dart:1608:8 - no_leading_underscores_for_local_identifiers
+  error - Undefined name 'widget' - lib\ui\screens\template_maker_screen.dart:1609:5 - undefined_identifier
+  error - Undefined name 'widget' - lib\ui\screens\template_maker_screen.dart:1610:7 - undefined_identifier
+warning - The declaration 'build' isn't referenced - lib\ui\screens\template_maker_screen.dart:1619:10 - unused_element
+  error - The method '_ColorButton' isn't defined for the type 'TemplateMakerScreen' - lib\ui\screens\template_maker_screen.dart:1626:13 - undefined_method
+  error - The method 'setState' isn't defined for the type 'TemplateMakerScreen' - lib\ui\screens\template_maker_screen.dart:1629:17 - undefined_method
+  error - The method 'setState' isn't defined for the type 'TemplateMakerScreen' - lib\ui\screens\template_maker_screen.dart:1642:19 - undefined_method
+  error - The method 'setState' isn't defined for the type 'TemplateMakerScreen' - lib\ui\screens\template_maker_screen.dart:1663:19 - undefined_method
+  error - The method 'setState' isn't defined for the type 'TemplateMakerScreen' - lib\ui\screens\template_maker_screen.dart:1677:19 - undefined_method
+  error - Classes can't be declared inside other classes - lib\ui\screens\template_maker_screen.dart:1690:1 - class_in_class
+  error - Expected a class member - lib\ui\screens\template_maker_screen.dart:1690:23 - expected_class_member
+   info - The variable name 'StatefulWidget' isn't a lowerCamelCase identifier - lib\ui\screens\template_maker_screen.dart:1690:31 - non_constant_identifier_names
+  error - Methods must have an explicit list of parameters - lib\ui\screens\template_maker_screen.dart:1690:31 - missing_method_parameters
+  error - The name 'StatefulWidget' is already defined - lib\ui\screens\template_maker_screen.dart:1690:31 - duplicate_definition
+warning - The value of the local variable 'layer' isn't used - lib\ui\screens\template_maker_screen.dart:1691:20 - unused_local_variable
+warning - The value of the local variable 'provider' isn't used - lib\ui\screens\template_maker_screen.dart:1692:32 - unused_local_variable
+  error - The name '_StrokeControls' isn't a class - lib\ui\screens\template_maker_screen.dart:1694:9 - creation_with_non_type
+  error - Expected to find ',' - lib\ui\screens\template_maker_screen.dart:1694:35 - expected_token
+  error - The getter 'layer' isn't defined for the type 'TemplateMakerScreen' - lib\ui\screens\template_maker_screen.dart:1694:40 - undefined_getter
+  error - Expected to find ',' - lib\ui\screens\template_maker_screen.dart:1694:56 - expected_token
+  error - The getter 'provider' isn't defined for the type 'TemplateMakerScreen' - lib\ui\screens\template_maker_screen.dart:1694:61 - undefined_getter
+  error - State isn't a type - lib\ui\screens\template_maker_screen.dart:1697:3 - not_a_type
+  error - The name '_StrokeControls' isn't a type, so it can't be used as a type argument - lib\ui\screens\template_maker_screen.dart:1697:9 - non_type_as_type_argument
+warning - The declaration 'createState' isn't referenced - lib\ui\screens\template_maker_screen.dart:1697:26 - unused_element
+  error - The method '_StrokeControlsState' isn't defined for the type 'TemplateMakerScreen' - lib\ui\screens\template_maker_screen.dart:1697:43 - undefined_method
+  error - Classes can't be declared inside other classes - lib\ui\screens\template_maker_screen.dart:1700:1 - class_in_class
+  error - Expected a class member - lib\ui\screens\template_maker_screen.dart:1700:28 - expected_class_member
+   info - The variable name 'State' isn't a lowerCamelCase identifier - lib\ui\screens\template_maker_screen.dart:1700:36 - non_constant_identifier_names
+  error - Methods must have an explicit list of parameters - lib\ui\screens\template_maker_screen.dart:1700:36 - missing_method_parameters
+  error - The name 'State' is already defined - lib\ui\screens\template_maker_screen.dart:1700:36 - duplicate_definition
+   info - The local variable '_width' starts with an underscore - lib\ui\screens\template_maker_screen.dart:1701:15 - no_leading_underscores_for_local_identifiers
+   info - The local variable '_color' starts with an underscore - lib\ui\screens\template_maker_screen.dart:1702:14 - no_leading_underscores_for_local_identifiers
+warning - The declaration 'initState' isn't referenced - lib\ui\screens\template_maker_screen.dart:1705:8 - unused_element
+  error - The method 'initState' isn't defined in a superclass of 'TemplateMakerScreen' - lib\ui\screens\template_maker_screen.dart:1706:11 - undefined_super_member
+  error - Undefined name 'widget' - lib\ui\screens\template_maker_screen.dart:1707:14 - undefined_identifier
+  error - Undefined name 'widget' - lib\ui\screens\template_maker_screen.dart:1708:14 - undefined_identifier
+warning - The declaration 'build' isn't referenced - lib\ui\screens\template_maker_screen.dart:1712:10 - unused_element
+  error - The method '_ColorButton' isn't defined for the type 'TemplateMakerScreen' - lib\ui\screens\template_maker_screen.dart:1717:9 - undefined_method
+  error - The method 'setState' isn't defined for the type 'TemplateMakerScreen' - lib\ui\screens\template_maker_screen.dart:1720:13 - undefined_method
+  error - Undefined name 'widget' - lib\ui\screens\template_maker_screen.dart:1721:13 - undefined_identifier
+  error - Undefined name 'widget' - lib\ui\screens\template_maker_screen.dart:1721:47 - undefined_identifier
+  error - The method 'setState' isn't defined for the type 'TemplateMakerScreen' - lib\ui\screens\template_maker_screen.dart:1733:15 - undefined_method
+  error - Undefined name 'widget' - lib\ui\screens\template_maker_screen.dart:1734:15 - undefined_identifier
+  error - Undefined name 'widget' - lib\ui\screens\template_maker_screen.dart:1734:49 - undefined_identifier
+  error - Expected to find '}' - lib\ui\screens\template_maker_screen.dart:1743:1 - expected_token
+

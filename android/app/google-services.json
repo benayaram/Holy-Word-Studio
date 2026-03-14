@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "706443073313",
+    "project_id": "holy-word-studio",
+    "storage_bucket": "holy-word-studio.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:706443073313:android:2598bab91792b0f69f9060",
+        "android_client_info": {
+          "package_name": "com.holy.canvas.holy_canvas"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "706443073313-ej9g4epd7p5anc6g5vuefkqin8fs5slm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.holy.canvas.holy_canvas",
+            "certificate_hash": "ca52823d88798865b66954b08564d1ec495e1045"
+          }
+        },
+        {
+          "client_id": "706443073313-60jqd56i89l52932ceosng3u0pklgj1s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCT3UZuglzHGEqve4Fk27KbMNBiDZpw-TI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "706443073313-60jqd56i89l52932ceosng3u0pklgj1s.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "706443073313-1m295s2kgi8blupa2mjahhpkn25kduks.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.holy.canvas.holyCanvas"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
