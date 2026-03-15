@@ -76,6 +76,8 @@ flutter:
 
   assets:
     - assets/fonts/
+    - assets/images/
+    - assets/images/logo.png
 
   fonts:
     - family: Aaradhana

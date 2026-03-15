@@ -34,40 +34,125 @@ class _TemplateGalleryScreenState extends State<TemplateGalleryScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return RefreshIndicator(
-      onRefresh: _refresh,
-      color: AppColors.primary,
-      child: FutureBuilder<List<TemplateModel>>(
-        key: _futureKey,
-        future: _loadTemplates(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
-          }
-
-          final templates = snapshot.data ?? [];
-
-          if (templates.isEmpty) {
-            return _buildEmptyState(context);
-          }
-
-          return GridView.builder(
-            // physics must allow pull-to-refresh (always scrollable)
-            physics: const AlwaysScrollableScrollPhysics(),
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 24),
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              crossAxisSpacing: 20,
-              mainAxisSpacing: 20,
-              childAspectRatio: 0.7,
+    return Scaffold(
+      backgroundColor: AppColors.background,
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Header with Search
+          Padding(
+            padding: const EdgeInsets.fromLTRB(24, 24, 24, 8),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'TEMPLATE GALLERY',
+                  style: AppTextStyles.heading1.copyWith(
+                    fontSize: 24,
+                    color: AppColors.textPrimary,
+                    letterSpacing: 2.0,
+                  ),
+                ),
+                const SizedBox(height: 24),
+                // Search Bar
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  decoration: BoxDecoration(
+                    color: AppColors.secondary,
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                  child: TextField(
+                    style: const TextStyle(color: Colors.white),
+                    decoration: InputDecoration(
+                      border: InputBorder.none,
+                      hintText: 'Search templates...',
+                      hintStyle: TextStyle(color: Colors.white.withValues(alpha: 0.3)),
+                      icon: Icon(Icons.search, color: Colors.white.withValues(alpha: 0.5)),
+                    ),
+                  ),
+                ),
+              ],
             ),
-            itemCount: templates.length + 1,
-            itemBuilder: (context, index) {
-              if (index == 0) return _buildCreateNewCard(context);
-              return _buildTemplateCard(context, templates[index - 1]);
-            },
-          );
-        },
+          ),
+
+          // Categories
+          const SizedBox(height: 16),
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            padding: const EdgeInsets.symmetric(horizontal: 24),
+            child: Row(
+              children: [
+                _buildCategoryTab('ALL', true),
+                _buildCategoryTab('FAVORITES', false),
+                _buildCategoryTab('HIS STORY', false),
+                _buildCategoryTab('SACRED', false),
+                _buildCategoryTab('GRACE', false),
+              ],
+            ),
+          ),
+
+          const SizedBox(height: 24),
+
+          // Grid
+          Expanded(
+            child: RefreshIndicator(
+              onRefresh: _refresh,
+              color: AppColors.primary,
+              child: FutureBuilder<List<TemplateModel>>(
+                key: _futureKey,
+                future: _loadTemplates(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Center(child: CircularProgressIndicator());
+                  }
+
+                  final templates = snapshot.data ?? [];
+
+                  return GridView.builder(
+                    physics: const AlwaysScrollableScrollPhysics(),
+                    padding: const EdgeInsets.symmetric(horizontal: 24),
+                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      crossAxisSpacing: 16,
+                      mainAxisSpacing: 16,
+                      childAspectRatio: 0.75,
+                    ),
+                    itemCount: templates.length + 1,
+                    itemBuilder: (context, index) {
+                      if (index == 0) return _buildCreateNewCard(context);
+                      return _buildTemplateCard(context, templates[index - 1]);
+                    },
+                  );
+                },
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildCategoryTab(String label, bool isActive) {
+    return Container(
+      margin: const EdgeInsets.only(right: 12),
+      child: Column(
+        children: [
+          Text(
+            label,
+            style: AppTextStyles.caption.copyWith(
+              color: isActive ? AppColors.primary : AppColors.textSecondary.withValues(alpha: 0.4),
+              fontWeight: FontWeight.bold,
+              letterSpacing: 2.0,
+            ),
+          ),
+          if (isActive)
+            Container(
+              margin: const EdgeInsets.only(top: 4),
+              width: 20,
+              height: 2,
+              color: AppColors.primary,
+            ),
+        ],
       ),
     );
   }
@@ -182,54 +267,6 @@ class _TemplateGalleryScreenState extends State<TemplateGalleryScreen> {
           ],
         ),
       ),
-    );
-  }
-
-  Widget _buildEmptyState(BuildContext context) {
-    return ListView(
-      // Wrapped in ListView so pull-to-refresh works on empty state too.
-      physics: const AlwaysScrollableScrollPhysics(),
-      children: [
-        SizedBox(
-          height: MediaQuery.of(context).size.height * 0.7,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(
-                Icons.style_outlined,
-                size: 80,
-                color: AppColors.primary.withValues(alpha: 0.2),
-              ),
-              const SizedBox(height: 24),
-              Text('No Templates Yet', style: AppTextStyles.heading2),
-              const SizedBox(height: 12),
-              Text(
-                'Design something beautiful today.',
-                style: AppTextStyles.bodyText.copyWith(
-                  color: AppColors.textSecondary,
-                ),
-              ),
-              const SizedBox(height: 32),
-              ElevatedButton.icon(
-                onPressed: widget.onCreateNew,
-                icon: const Icon(Icons.add),
-                label: const Text('New Template'),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.primary,
-                  foregroundColor: Colors.white,
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 24,
-                    vertical: 12,
-                  ),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ],
     );
   }
 }

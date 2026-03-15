@@ -2,11 +2,9 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:intl/intl.dart';
-import 'package:gallery_saver_plus/gallery_saver.dart';
 
 import '../../../core/constants/app_colors.dart';
 import '../../../core/constants/app_text_styles.dart';
-import 'viewer_screen.dart';
 
 class CalendarGridScreen extends StatefulWidget {
   const CalendarGridScreen({super.key});
@@ -17,25 +15,8 @@ class CalendarGridScreen extends StatefulWidget {
 
 /// Public state class so [HomeScreen] can call [refresh] via a [GlobalKey].
 class CalendarGridScreenState extends State<CalendarGridScreen> {
-  String _selectedMonth = DateFormat('MMMM').format(DateTime.now());
-  final List<String> _months = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December',
-  ];
+  final String _selectedMonth = DateFormat('MMMM').format(DateTime.now());
   List<File> _images = [];
-  bool _isLoading = false;
-  bool _isSaving = false;
-  int _saveProgress = 0;
 
   @override
   void initState() {
@@ -48,7 +29,6 @@ class CalendarGridScreenState extends State<CalendarGridScreen> {
   void refresh() => _loadImages();
 
   Future<void> _loadImages() async {
-    setState(() => _isLoading = true);
     try {
       final directory = await getApplicationDocumentsDirectory();
       final batchFolder = Directory(
@@ -94,248 +74,187 @@ class CalendarGridScreenState extends State<CalendarGridScreen> {
     } catch (e) {
       // ignore
       setState(() => _images = []);
-    } finally {
-      setState(() => _isLoading = false);
     }
   }
 
-  Future<void> _saveAllToGallery() async {
-    if (_images.isEmpty) return;
-
-    setState(() {
-      _isSaving = true;
-      _saveProgress = 0;
-    });
-
-    int successCount = 0;
-    for (final file in _images) {
-      final success = await GallerySaver.saveImage(
-        file.path,
-        albumName: 'Holy Word Studio',
-      );
-      if (success == true) {
-        successCount++;
-      }
-      setState(() => _saveProgress++);
-    }
-
-    setState(() => _isSaving = false);
-
-    if (mounted) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(
-            'Successfully exported $successCount images to Native Gallery!',
-          ),
-        ),
-      );
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.background,
       appBar: AppBar(
-        title: const Text('Generated Content'),
+        title: Text(
+          '${_selectedMonth.toUpperCase()} 2024',
+          style: AppTextStyles.heading2.copyWith(fontSize: 18, letterSpacing: 2.0),
+        ),
+        centerTitle: true,
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: AppColors.textPrimary),
+          onPressed: () => Navigator.pop(context),
+        ),
         actions: [
-          if (_images.isNotEmpty && !_isSaving)
-            IconButton(
-              icon: const Icon(Icons.download),
-              tooltip: 'Save All to Gallery',
-              onPressed: _saveAllToGallery,
-            ),
           IconButton(
-            icon: const Icon(Icons.refresh),
-            onPressed: _isSaving ? null : _loadImages,
+            icon: const Icon(Icons.more_vert, color: AppColors.textPrimary),
+            onPressed: () {},
           ),
         ],
       ),
-      body: _isSaving
-          ? Center(
+      body: SingleChildScrollView(
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Container(
-                    width: 100,
-                    height: 100,
-                    padding: const EdgeInsets.all(4),
-                    decoration: const BoxDecoration(
-                      shape: BoxShape.circle,
-                      gradient: AppColors.primaryGradient,
-                    ),
-                    child: const CircularProgressIndicator(
-                      color: Colors.white,
-                      strokeWidth: 6,
-                    ),
-                  ),
-                  const SizedBox(height: 32),
-                  Text(
-                    'Exporting to Gallery...',
-                    style: AppTextStyles.heading1.copyWith(
-                      color: AppColors.primary,
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-                  Text(
-                    'Progress: $_saveProgress / ${_images.length}',
-                    style: AppTextStyles.bodyText.copyWith(
-                      color: AppColors.textPrimary,
-                    ),
-                  ),
+                   // Month Selector / Horizontal bar if needed, but grid is main
+                   const SizedBox(height: 16),
+                   
+                   // Day Grid (Circular)
+                   Container(
+                     height: 380,
+                     padding: const EdgeInsets.symmetric(horizontal: 24),
+                     child: GridView.builder(
+                       physics: const NeverScrollableScrollPhysics(),
+                       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                         crossAxisCount: 7,
+                         crossAxisSpacing: 10,
+                         mainAxisSpacing: 10,
+                       ),
+                       itemCount: 31, // Hardcoded for design for now
+                       itemBuilder: (context, index) {
+                         final day = index + 1;
+                         final hasImage = day <= _images.length;
+                         final isSelected = day == 15; // Placeholder selection
+
+                         return _buildDayCircle(day, hasImage, isSelected);
+                       },
+                     ),
+                   ),
+
+                   const SizedBox(height: 32),
+                   
+                   Padding(
+                     padding: const EdgeInsets.symmetric(horizontal: 24),
+                     child: Text(
+                       "TODAY'S SELECTION",
+                       style: AppTextStyles.caption.copyWith(
+                         fontWeight: FontWeight.bold,
+                         letterSpacing: 2.0,
+                         color: AppColors.textSecondary.withValues(alpha: 0.5),
+                       ),
+                     ),
+                   ),
+
+                   const SizedBox(height: 16),
+
+                   // Featured Daily Card
+                   _buildFeaturedDailyCard(),
+
+                   const SizedBox(height: 40),
                 ],
               ),
-            )
-          : Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 24.0,
-                    vertical: 16.0,
-                  ),
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 20,
-                      vertical: 4,
-                    ),
-                    decoration: BoxDecoration(
-                      color: AppColors.secondary,
-                      borderRadius: BorderRadius.circular(20),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black.withValues(alpha: 0.1),
-                          blurRadius: 15,
-                          offset: const Offset(0, 5),
-                        ),
-                      ],
-                      border: Border.all(
-                        color: AppColors.primary.withValues(alpha: 0.2),
-                      ),
-                    ),
-                    child: DropdownButtonHideUnderline(
-                      child: DropdownButton<String>(
-                        value: _selectedMonth,
-                        dropdownColor: AppColors.secondary,
-                        icon: const Icon(
-                          Icons.keyboard_arrow_down_rounded,
-                          color: AppColors.primary,
-                        ),
-                        style: AppTextStyles.bodyText.copyWith(
-                          fontWeight: FontWeight.bold,
-                          color: AppColors.primary,
-                        ),
-                        items: _months.map((String month) {
-                          return DropdownMenuItem<String>(
-                            value: month,
-                            child: Text(month),
-                          );
-                        }).toList(),
-                        onChanged: (String? newValue) {
-                          if (newValue != null) {
-                            setState(() {
-                              _selectedMonth = newValue;
-                              _loadImages();
-                            });
-                          }
-                        },
-                      ),
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: _isLoading
-                      ? const Center(child: CircularProgressIndicator())
-                      : _images.isEmpty
-                      ? Center(
-                          child: Text(
-                            'No generated batches found for $_selectedMonth.',
-                            style: AppTextStyles.bodyText,
-                          ),
-                        )
-                      : RefreshIndicator(
-                          onRefresh: _loadImages,
-                          child: GridView.builder(
-                            padding: const EdgeInsets.all(20),
-                            gridDelegate:
-                                const SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 2,
-                                  crossAxisSpacing: 20,
-                                  mainAxisSpacing: 20,
-                                  childAspectRatio: 0.85,
-                                ),
-                            itemCount: _images.length,
-                            itemBuilder: (context, index) {
-                              final file = _images[index];
-                              return GestureDetector(
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (_) =>
-                                          ViewerScreen(imageFile: file),
-                                    ),
-                                  );
-                                },
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(20),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.black.withValues(
-                                          alpha: 0.05,
-                                        ),
-                                        blurRadius: 12,
-                                        offset: const Offset(0, 6),
-                                      ),
-                                    ],
-                                  ),
-                                  clipBehavior: Clip.antiAlias,
-                                  child: Stack(
-                                    fit: StackFit.expand,
-                                    children: [
-                                      Image.file(file, fit: BoxFit.cover),
-                                      Positioned(
-                                        bottom: 0,
-                                        left: 0,
-                                        right: 0,
-                                        child: Container(
-                                          decoration: BoxDecoration(
-                                            gradient: LinearGradient(
-                                              begin: Alignment.bottomCenter,
-                                              end: Alignment.topCenter,
-                                              colors: [
-                                                Colors.black.withValues(
-                                                  alpha: 0.6,
-                                                ),
-                                                Colors.transparent,
-                                              ],
-                                            ),
-                                          ),
-                                          padding: const EdgeInsets.symmetric(
-                                            vertical: 12,
-                                            horizontal: 16,
-                                          ),
-                                          child: Text(
-                                            'DAY ${index + 1}',
-                                            style: AppTextStyles.caption
-                                                .copyWith(
-                                                  color: Colors.white,
-                                                  fontWeight: FontWeight.w900,
-                                                  letterSpacing: 1.5,
-                                                ),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              );
-                            },
-                          ),
-                        ),
-                ),
-              ],
             ),
     );
+  }
+
+  Widget _buildDayCircle(int day, bool hasImage, bool isSelected) {
+    return Container(
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        color: isSelected ? AppColors.primary : (hasImage ? AppColors.secondary : Colors.white),
+        border: Border.all(
+          color: isSelected ? AppColors.primary : Colors.grey.withValues(alpha: 0.1),
+        ),
+        boxShadow: isSelected ? [
+          BoxShadow(
+            color: AppColors.primary.withValues(alpha: 0.3),
+            blurRadius: 8,
+            offset: const Offset(0, 4),
+          )
+        ] : [],
+      ),
+      child: Center(
+        child: Text(
+          day.toString(),
+          style: TextStyle(
+            color: isSelected || hasImage ? Colors.white : AppColors.textPrimary.withValues(alpha: 0.4),
+            fontSize: 12,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildFeaturedDailyCard() {
+    if (_images.isEmpty) return _buildEmptyHint();
+    
+    // For now taking the first image or index 14 (Day 15) to match design
+    final file = _images.isNotEmpty ? _images[0] : null;
+
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 24),
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(32),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withValues(alpha: 0.05),
+              blurRadius: 20,
+              offset: const Offset(0, 10),
+            ),
+          ],
+        ),
+        clipBehavior: Clip.antiAlias,
+        child: Column(
+          children: [
+             // Image area
+             AspectRatio(
+               aspectRatio: 1,
+               child: file != null 
+                 ? Image.file(file, fit: BoxFit.cover)
+                 : Container(color: AppColors.background, child: const Icon(Icons.image, color: Colors.grey)),
+             ),
+             // Footer
+             Padding(
+               padding: const EdgeInsets.all(20),
+               child: Row(
+                 children: [
+                   Column(
+                     crossAxisAlignment: CrossAxisAlignment.start,
+                     children: [
+                       Text(
+                         'DAILY VERSE',
+                         style: AppTextStyles.caption.copyWith(fontWeight: FontWeight.bold, letterSpacing: 1.0),
+                       ),
+                       Text(
+                         'John 3:16 • Bible Verse',
+                         style: AppTextStyles.caption.copyWith(fontSize: 10, color: AppColors.textSecondary.withValues(alpha: 0.5)),
+                       ),
+                     ],
+                   ),
+                   const Spacer(),
+                   IconButton(
+                     icon: const Icon(Icons.ios_share_outlined, color: AppColors.primary),
+                     onPressed: () {},
+                   ),
+                   IconButton(
+                     icon: const Icon(Icons.download_outlined, color: AppColors.primary),
+                     onPressed: () {},
+                   ),
+                 ],
+               ),
+             ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildEmptyHint() {
+    return const Center(child: Padding(
+      padding: EdgeInsets.all(40.0),
+      child: Text('No images generated yet for this month.'),
+    ));
   }
 }

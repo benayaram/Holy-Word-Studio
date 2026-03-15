@@ -52,7 +52,6 @@ class _BatchGeneratorScreenState extends State<BatchGeneratorScreen> {
   /// Live status message from the AI Horde queue, shown in the progress overlay.
   String _hordeStatus = '';
 
-  Key _futureKey = UniqueKey();
   final ScreenshotController _screenshotController = ScreenshotController();
 
   final List<String> _months = [
@@ -378,13 +377,6 @@ class _BatchGeneratorScreenState extends State<BatchGeneratorScreen> {
     );
   }
 
-  Future<void> _refresh() async {
-    context.read<TemplateEditorProvider>().repository.invalidateCache();
-    setState(() {
-      _selectedTemplate = null;
-      _futureKey = UniqueKey();
-    });
-  }
 
   /// Moves all temporary batch images to the actual calendar month folder,
   /// then notifies HomeScreen to switch to the Calendar tab.
@@ -432,26 +424,20 @@ class _BatchGeneratorScreenState extends State<BatchGeneratorScreen> {
       backgroundColor: AppColors.background,
       appBar: AppBar(
         title: Text(
-          _viewMode == ViewMode.config ? 'Generator' : '$_selectedMonth Posts',
-          style: AppTextStyles.heading2.copyWith(fontSize: 18),
+          'BATCH GENERATOR',
+          style: AppTextStyles.heading2.copyWith(fontSize: 18, color: AppColors.primary, letterSpacing: 2.0),
         ),
+        centerTitle: true,
         actions: _buildAppBarActions(),
         elevation: 0,
         backgroundColor: Colors.transparent,
       ),
       body: SafeArea(
-        child: Stack(
-          children: [
-            // The main screen (either progress UI or config UI) placed on top
-            Positioned.fill(
-              child: _isGenerating
-                  ? _buildProgressOverlay()
-                  : (_viewMode == ViewMode.config
-                        ? _buildConfigUI()
-                        : _buildReviewUI()),
-            ),
-          ],
-        ),
+        child: _isGenerating
+            ? _buildProgressOverlay()
+            : (_viewMode == ViewMode.config
+                ? _buildConfigUI()
+                : _buildReviewUI()),
       ),
     );
   }
@@ -467,9 +453,7 @@ class _BatchGeneratorScreenState extends State<BatchGeneratorScreen> {
         ),
         onPressed: () {
           setState(() {
-            _viewMode = _viewMode == ViewMode.grid
-                ? ViewMode.list
-                : ViewMode.grid;
+            _viewMode = _viewMode == ViewMode.grid ? ViewMode.list : ViewMode.grid;
           });
         },
       ),
@@ -483,85 +467,76 @@ class _BatchGeneratorScreenState extends State<BatchGeneratorScreen> {
   }
 
   Widget _buildConfigUI() {
-    return RefreshIndicator(
-      onRefresh: _refresh,
-      color: AppColors.primary,
-      child: FutureBuilder<List<TemplateModel>>(
-        key: _futureKey,
-        future: context
-            .read<TemplateEditorProvider>()
-            .repository
-            .getSavedTemplates(),
-        builder: (context, snapshot) {
-          final templates = snapshot.data ?? [];
+    return Column(
+      children: [
+        // Stepper
+        Container(
+          padding: const EdgeInsets.symmetric(vertical: 20),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              _buildStepIndicator('01.', 'CONTEXT', true),
+              _buildStepDivider(),
+              _buildStepIndicator('02.', 'ART STYLE', false),
+              _buildStepDivider(),
+              _buildStepIndicator('03.', 'REVIEW', false),
+            ],
+          ),
+        ),
 
-          return SingleChildScrollView(
-            physics: const AlwaysScrollableScrollPhysics(),
-            padding: const EdgeInsets.symmetric(
-              horizontal: 24.0,
-              vertical: 12.0,
-            ),
+        Expanded(
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'BATCH GENERATOR',
-                  style: AppTextStyles.heading1.copyWith(
-                    letterSpacing: 4,
-                    fontWeight: FontWeight.w900,
-                    color: AppColors.primary,
-                  ),
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  'Generate a full month of verse images',
+                  'STEP 01/03',
                   style: AppTextStyles.caption.copyWith(
-                    color: AppColors.accent,
+                    color: AppColors.primary,
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: 2.0,
                   ),
                 ),
+                const SizedBox(height: 12),
+                Text(
+                  'Select Current Context',
+                  style: AppTextStyles.heading1.copyWith(fontSize: 24),
+                ),
+                const SizedBox(height: 24),
+                
+                // Context Grid
+                GridView.count(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 16,
+                  mainAxisSpacing: 16,
+                  childAspectRatio: 1.1,
+                  children: [
+                    _buildContextCard('MOURNING', Icons.water_drop_outlined, false),
+                    _buildContextCard('JOY', Icons.sentiment_very_satisfied, false),
+                    _buildContextCard('PEACE', Icons.wb_sunny_outlined, true), // Featured/Active
+                    _buildContextCard('FAITH', Icons.auto_awesome, false),
+                    _buildContextCard('STRENGTH', Icons.fitness_center, false),
+                    _buildContextCard('WISDOM', Icons.lightbulb_outline, false),
+                  ],
+                ),
+
                 const SizedBox(height: 48),
-                _buildSectionTitle('Select Template'),
-                const SizedBox(height: 12),
-                if (templates.isEmpty)
-                  _buildNoTemplatesHint()
-                else
-                  DropdownButtonFormField<TemplateModel>(
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: AppColors.surface,
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                        borderSide: BorderSide(color: AppColors.glassBorder),
-                      ),
-                    ),
-                    isExpanded: true,
-                    hint: const Text('Choose a template…'),
-                    initialValue: templates.contains(_selectedTemplate)
-                        ? _selectedTemplate
-                        : null,
-                    items: templates
-                        .map(
-                          (t) => DropdownMenuItem(
-                            value: t,
-                            child: Text(
-                              t.name,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ),
-                        )
-                        .toList(),
-                    onChanged: (val) => setState(() => _selectedTemplate = val),
-                  ),
-                const SizedBox(height: 32),
                 _buildSectionTitle('Select Month'),
-                const SizedBox(height: 12),
+                const SizedBox(height: 16),
                 DropdownButtonFormField<String>(
                   decoration: InputDecoration(
                     filled: true,
-                    fillColor: AppColors.surface,
+                    fillColor: Colors.white,
                     border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                      borderSide: BorderSide(color: AppColors.glassBorder),
+                      borderRadius: BorderRadius.circular(16),
+                      borderSide: BorderSide(color: Colors.grey.withValues(alpha: 0.2)),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(16),
+                      borderSide: BorderSide(color: Colors.grey.withValues(alpha: 0.2)),
                     ),
                   ),
                   initialValue: _selectedMonth,
@@ -570,39 +545,136 @@ class _BatchGeneratorScreenState extends State<BatchGeneratorScreen> {
                       .toList(),
                   onChanged: (val) => setState(() => _selectedMonth = val!),
                 ),
-                if (_selectedTemplate != null) ...[
-                  const SizedBox(height: 20),
-                  Container(
-                    padding: const EdgeInsets.all(12),
-                    decoration: BoxDecoration(
-                      color: AppColors.primary.withValues(alpha: 0.06),
-                      borderRadius: BorderRadius.circular(10),
+                const SizedBox(height: 24),
+                
+                // Template dropdown remains for functional purposes but styled
+                _buildSectionTitle('Visual Foundation'),
+                const SizedBox(height: 16),
+                FutureBuilder<List<TemplateModel>>(
+                  future: context.read<TemplateEditorProvider>().repository.getSavedTemplates(),
+                  builder: (context, snapshot) {
+                    final templates = snapshot.data ?? [];
+                    if (templates.isEmpty) return _buildNoTemplatesHint();
+                    
+                    return DropdownButtonFormField<TemplateModel>(
+                      decoration: InputDecoration(
+                        filled: true,
+                        fillColor: Colors.white,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(16),
+                          borderSide: BorderSide(color: Colors.grey.withValues(alpha: 0.2)),
+                        ),
+                      ),
+                      isExpanded: true,
+                      hint: const Text('Choose a visual template…'),
+                      initialValue: templates.contains(_selectedTemplate) ? _selectedTemplate : null,
+                      items: templates.map((t) => DropdownMenuItem(value: t, child: Text(t.name))).toList(),
+                      onChanged: (val) => setState(() => _selectedTemplate = val),
+                    );
+                  },
+                ),
+                
+                const SizedBox(height: 48),
+                SizedBox(
+                  width: double.infinity,
+                  height: 60,
+                  child: ElevatedButton(
+                    onPressed: _selectedTemplate == null ? null : _generateBatch,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: AppColors.primary,
+                      foregroundColor: Colors.white,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                      elevation: 4,
                     ),
-                    child: Row(
-                      children: [
-                        const Icon(
-                          Icons.info_outline,
-                          color: AppColors.primary,
-                          size: 18,
-                        ),
-                        const SizedBox(width: 10),
-                        Text(
-                          'Will generate ${_daysInMonth()} images for $_selectedMonth',
-                          style: AppTextStyles.caption.copyWith(
-                            color: AppColors.textPrimary,
-                          ),
-                        ),
-                      ],
+                    child: Text(
+                      'PROCEED TO STYLE',
+                      style: AppTextStyles.buttonText.copyWith(fontSize: 16),
                     ),
                   ),
-                ],
-                const SizedBox(height: 32),
-                _buildGenerateButton(),
+                ),
+                const SizedBox(height: 40),
               ],
             ),
-          );
-        },
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildStepIndicator(String num, String label, bool isActive) {
+    return Column(
+      children: [
+        Text(
+          num,
+          style: AppTextStyles.caption.copyWith(
+            color: isActive ? AppColors.primary : AppColors.textSecondary.withValues(alpha: 0.3),
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        Text(
+          label,
+          style: AppTextStyles.caption.copyWith(
+            color: isActive ? AppColors.textPrimary : AppColors.textSecondary.withValues(alpha: 0.3),
+            fontSize: 9,
+            fontWeight: FontWeight.bold,
+            letterSpacing: 1.0,
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildStepDivider() {
+    return Container(
+      width: 40,
+      height: 1,
+      margin: const EdgeInsets.symmetric(horizontal: 12),
+      color: AppColors.textSecondary.withValues(alpha: 0.1),
+    );
+  }
+
+  Widget _buildContextCard(String label, IconData icon, bool isActive) {
+    return Container(
+      decoration: BoxDecoration(
+        color: isActive ? AppColors.secondary : Colors.white,
+        borderRadius: BorderRadius.circular(24),
+        border: isActive ? Border.all(color: AppColors.primary, width: 2) : Border.all(color: Colors.grey.withValues(alpha: 0.1)),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withValues(alpha: 0.05),
+            blurRadius: 10,
+            offset: const Offset(0, 5),
+          ),
+        ],
       ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(
+            icon,
+            color: isActive ? AppColors.primary : AppColors.textSecondary.withValues(alpha: 0.4),
+            size: 32,
+          ),
+          const SizedBox(height: 12),
+          Text(
+            label,
+            style: AppTextStyles.caption.copyWith(
+              color: isActive ? Colors.white : AppColors.textSecondary,
+              fontWeight: FontWeight.bold,
+              letterSpacing: 1.5,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildSectionTitle(String title) {
+    return Text(
+      title,
+      style: AppTextStyles.heading2.copyWith(fontSize: 14, color: AppColors.textSecondary.withValues(alpha: 0.5)),
     );
   }
 
@@ -897,51 +969,6 @@ class _BatchGeneratorScreenState extends State<BatchGeneratorScreen> {
     );
   }
 
-  Widget _buildSectionTitle(String title) {
-    return Text(
-      title.toUpperCase(),
-      style: AppTextStyles.caption.copyWith(
-        fontWeight: FontWeight.bold,
-        letterSpacing: 2,
-        color: AppColors.primary,
-      ),
-    );
-  }
-
-  Widget _buildGenerateButton() {
-    return Container(
-      width: double.infinity,
-      height: 60,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(16),
-        gradient: _selectedTemplate != null
-            ? AppColors.primaryGradient
-            : LinearGradient(
-                colors: [Colors.grey.shade300, Colors.grey.shade300],
-              ),
-        boxShadow: _selectedTemplate != null
-            ? [
-                BoxShadow(
-                  color: AppColors.primary.withValues(alpha: 0.3),
-                  blurRadius: 15,
-                  offset: const Offset(0, 8),
-                ),
-              ]
-            : [],
-      ),
-      child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.transparent,
-          shadowColor: Colors.transparent,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16),
-          ),
-        ),
-        onPressed: _selectedTemplate == null ? null : _generateBatch,
-        child: Text('START GENERATION', style: AppTextStyles.buttonText),
-      ),
-    );
-  }
 }
 
 // ---------------------------------------------------------------------------

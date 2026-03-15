@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:share_plus/share_plus.dart';
-import '../../core/constants/app_text_styles.dart';
+import '../../core/constants/app_images.dart';
 
 class ViewerScreen extends StatelessWidget {
   final File imageFile;
@@ -28,12 +28,10 @@ class ViewerScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.black,
         iconTheme: const IconThemeData(color: Colors.white),
-        title: Text(
-          'IMAGE VIEWER',
-          style: AppTextStyles.heading2.copyWith(
-            color: Colors.white,
-            letterSpacing: 2,
-          ),
+        title: Image.asset(
+          AppImages.logo,
+          height: 35,
+          fit: BoxFit.contain,
         ),
         actions: [
           IconButton(

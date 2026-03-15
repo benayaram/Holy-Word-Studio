@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import '../../core/constants/app_colors.dart';
+import '../../core/constants/app_images.dart';
 import '../../core/constants/app_strings.dart';
 import '../../core/constants/app_text_styles.dart';
 import '../../core/services/auth_service.dart';
@@ -48,53 +49,67 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        decoration: const BoxDecoration(gradient: AppColors.primaryGradient),
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                padding: const EdgeInsets.all(32),
-                decoration: BoxDecoration(
-                  color: AppColors.primary.withValues(alpha: 0.1),
-                  shape: BoxShape.circle,
-                  boxShadow: [
-                    BoxShadow(
-                      color: AppColors.primary.withValues(alpha: 0.2),
-                      blurRadius: 40,
-                      spreadRadius: 10,
-                    ),
-                  ],
+      backgroundColor: AppColors.secondary,
+      body: Stack(
+        children: [
+          Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                // Logo
+                Image.asset(
+                  AppImages.logo,
+                  height: 120,
+                  fit: BoxFit.contain,
                 ),
-                child: const Icon(
-                  Icons.auto_awesome_rounded,
-                  size: 100,
-                  color: AppColors.primary,
+                const SizedBox(height: 48),
+                // App Name
+                Text(
+                  AppStrings.appName.toUpperCase(),
+                  style: AppTextStyles.heading1.copyWith(
+                    color: AppColors.primary,
+                    letterSpacing: 4.0,
+                  ),
                 ),
-              ),
-              const SizedBox(height: 48),
-              Text(
-                AppStrings.appName.toUpperCase(),
-                style: AppTextStyles.heading1.copyWith(
-                  fontSize: 40,
-                  letterSpacing: 6,
-                  color: AppColors.primary,
-                  fontWeight: FontWeight.w900,
+                const SizedBox(height: 12),
+                // Subtitle
+                Text(
+                  'ELEGANCE IN EVERY VERSE',
+                  style: AppTextStyles.caption.copyWith(
+                    color: Colors.white.withValues(alpha: 0.5),
+                    letterSpacing: 2.0,
+                    fontWeight: FontWeight.w300,
+                  ),
                 ),
-              ),
-              const SizedBox(height: 48),
-              const SizedBox(
-                width: 50,
-                height: 50,
-                child: CircularProgressIndicator(
-                  color: AppColors.primary,
-                  strokeWidth: 4,
+                const SizedBox(height: 80),
+                // Loading Indicator
+                const SizedBox(
+                  width: 24,
+                  height: 24,
+                  child: CircularProgressIndicator(
+                    strokeWidth: 2,
+                    valueColor: AlwaysStoppedAnimation<Color>(AppColors.primary),
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
+          // Footer
+          Positioned(
+            bottom: 48,
+            left: 0,
+            right: 0,
+            child: Center(
+              child: Text(
+                'EST. MMXXIV',
+                style: AppTextStyles.caption.copyWith(
+                  color: Colors.white.withValues(alpha: 0.3),
+                  letterSpacing: 1.5,
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

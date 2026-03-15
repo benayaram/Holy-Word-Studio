@@ -4,10 +4,9 @@ import 'daily_design_screen.dart';
 import 'batch_generator_screen.dart';
 import 'calendar_grid_screen.dart';
 import 'template_maker_screen.dart';
-import '../../core/services/auth_service.dart';
-import '../../core/constants/app_strings.dart';
+import 'notifications_screen.dart';
+import '../../core/constants/app_images.dart';
 import '../../core/constants/app_colors.dart';
-import '../../core/constants/app_text_styles.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -57,17 +56,33 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       backgroundColor: AppColors.background,
       appBar: AppBar(
-        title: Text(switch (_currentIndex) {
-          1 => AppStrings.navGenerate,
-          2 => AppStrings.navCalendar,
-          3 => 'EDITOR',
-          _ => AppStrings.navDesign,
-        }, style: AppTextStyles.heading2.copyWith(color: AppColors.primary)),
+        leading: Builder(
+          builder: (context) => IconButton(
+            icon: const Icon(Icons.menu, color: AppColors.primary),
+            onPressed: () => Scaffold.of(context).openDrawer(),
+          ),
+        ),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        centerTitle: true,
+        title: Image.asset(
+          AppImages.logo,
+          height: 30,
+          fit: BoxFit.contain,
+        ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.logout, color: AppColors.primary),
-            onPressed: () async => AuthService().signOut(),
+            icon: const Icon(Icons.notifications_outlined, color: AppColors.primary, size: 22),
+            onPressed: () => Navigator.push(
+              context,
+              MaterialPageRoute(builder: (_) => const NotificationsScreen()),
+            ),
           ),
+          IconButton(
+            icon: const Icon(Icons.person_outline, color: AppColors.primary, size: 22),
+            onPressed: () {},
+          ),
+          const SizedBox(width: 8),
         ],
       ),
       body: IndexedStack(index: _currentIndex, children: screens),
