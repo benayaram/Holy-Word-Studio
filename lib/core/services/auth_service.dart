@@ -11,7 +11,7 @@ class AuthService {
     if (!_isGoogleSignInInitialized) {
       await _googleSignIn.initialize(
         serverClientId:
-            '706443073313-60jqd56i89l52932ceosng3u0pklgj1s.apps.googleusercontent.com',
+            '704860501882-ngcfh111vcg3asf3glm933fp24enp0jl.apps.googleusercontent.com',
       );
       _isGoogleSignInInitialized = true;
     }
@@ -51,7 +51,7 @@ class AuthService {
       );
 
       AppLogger.info(
-        'User signed in with Google: \${userCredential.user?.email}',
+        'User signed in with Google: ${userCredential.user?.email}',
       );
       return userCredential;
     } catch (e) {

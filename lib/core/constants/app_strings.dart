@@ -1,7 +1,7 @@
 class AppStrings {
   AppStrings._();
 
-  static const String appName = 'Holy Word Studio';
+  static const String appName = 'Holy Canvas';
   static const String saveTemplate = 'Save Template';
   static const String generateBatch = 'Generate Batch';
   static const String share = 'Share';

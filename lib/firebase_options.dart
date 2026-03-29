@@ -41,47 +41,47 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyBko4mBfKTrrLg4BjP7VK6E-jJzcDHG6Z0',
-    appId: '1:706443073313:web:e8e3b2a7a7e621f79f9060',
-    messagingSenderId: '706443073313',
-    projectId: 'holy-word-studio',
-    authDomain: 'holy-word-studio.firebaseapp.com',
-    storageBucket: 'holy-word-studio.firebasestorage.app',
+    apiKey: 'AIzaSyAYfC7wW9HrDavLlt-wPgMCsQaLUomjXSc',
+    appId: '1:704860501882:web:afecd73e589c62159648c3',
+    messagingSenderId: '704860501882',
+    projectId: 'my-holy-canvas',
+    authDomain: 'my-holy-canvas.firebaseapp.com',
+    storageBucket: 'my-holy-canvas.firebasestorage.app',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyCT3UZuglzHGEqve4Fk27KbMNBiDZpw-TI',
-    appId: '1:706443073313:android:2598bab91792b0f69f9060',
-    messagingSenderId: '706443073313',
-    projectId: 'holy-word-studio',
-    storageBucket: 'holy-word-studio.firebasestorage.app',
+    apiKey: 'AIzaSyCM8OXTSKU80oyPxiuLxcX4MnX8KxFVOK0',
+    appId: '1:704860501882:android:94da1948da619c239648c3',
+    messagingSenderId: '704860501882',
+    projectId: 'my-holy-canvas',
+    storageBucket: 'my-holy-canvas.firebasestorage.app',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyCrYuLSoUxI-Lp8L3WeYfb8KpAsqlUki1s',
-    appId: '1:706443073313:ios:63b777458f78e46c9f9060',
-    messagingSenderId: '706443073313',
-    projectId: 'holy-word-studio',
-    storageBucket: 'holy-word-studio.firebasestorage.app',
+    apiKey: 'AIzaSyCju5UaWF_zrQ1H1v0l2eaKw7-MtXMSUDI',
+    appId: '1:704860501882:ios:73deec8e7acef8599648c3',
+    messagingSenderId: '704860501882',
+    projectId: 'my-holy-canvas',
+    storageBucket: 'my-holy-canvas.firebasestorage.app',
     iosBundleId: 'com.holy.canvas.holyCanvas',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyCrYuLSoUxI-Lp8L3WeYfb8KpAsqlUki1s',
-    appId: '1:706443073313:ios:63b777458f78e46c9f9060',
-    messagingSenderId: '706443073313',
-    projectId: 'holy-word-studio',
-    storageBucket: 'holy-word-studio.firebasestorage.app',
+    apiKey: 'AIzaSyCju5UaWF_zrQ1H1v0l2eaKw7-MtXMSUDI',
+    appId: '1:704860501882:ios:73deec8e7acef8599648c3',
+    messagingSenderId: '704860501882',
+    projectId: 'my-holy-canvas',
+    storageBucket: 'my-holy-canvas.firebasestorage.app',
     iosBundleId: 'com.holy.canvas.holyCanvas',
   );
 
   static const FirebaseOptions windows = FirebaseOptions(
-    apiKey: 'AIzaSyBko4mBfKTrrLg4BjP7VK6E-jJzcDHG6Z0',
-    appId: '1:706443073313:web:f55650bd853dea109f9060',
-    messagingSenderId: '706443073313',
-    projectId: 'holy-word-studio',
-    authDomain: 'holy-word-studio.firebaseapp.com',
-    storageBucket: 'holy-word-studio.firebasestorage.app',
+    apiKey: 'AIzaSyAYfC7wW9HrDavLlt-wPgMCsQaLUomjXSc',
+    appId: '1:704860501882:web:0497c351dec0498d9648c3',
+    messagingSenderId: '704860501882',
+    projectId: 'my-holy-canvas',
+    authDomain: 'my-holy-canvas.firebaseapp.com',
+    storageBucket: 'my-holy-canvas.firebasestorage.app',
   );
 
 }

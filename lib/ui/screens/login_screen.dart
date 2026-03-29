@@ -114,104 +114,90 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
               padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 40),
-              child: Column(
-                children: [
-                  // HandleBar icon shadow
-                  Container(
-                    width: 48,
-                    height: 5,
-                    decoration: BoxDecoration(
-                      color: Colors.black.withValues(alpha: 0.1),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                  ),
-                  const SizedBox(height: 32),
-                  Text(
-                    'Welcome to',
-                    style: AppTextStyles.bodyText.copyWith(
-                      color: AppColors.textSecondary,
-                      letterSpacing: 0.5,
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-                  Text(
-                    AppStrings.appName.toUpperCase(),
-                    style: AppTextStyles.heading1.copyWith(
-                      color: AppColors.primary,
-                      fontSize: 32,
-                      letterSpacing: 2.0,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                  const SizedBox(height: 16),
-                  Text(
-                    'Share the Gospel beautifully every day.',
-                    style: AppTextStyles.bodyText.copyWith(
-                      color: AppColors.textSecondary.withValues(alpha: 0.7),
-                      fontStyle: FontStyle.italic,
-                      fontSize: 14,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                  const SizedBox(height: 12),
-                  const Divider(height: 64, thickness: 1, color: Colors.blueGrey),
-                  
-                  if (_isLoading)
-                    const Expanded(
-                      child: Center(
-                        child: CircularProgressIndicator(color: AppColors.primary),
-                      ),
-                    )
-                  else ...[
-                    // Google Sign In
-                    _buildSocialButton(
-                      label: 'Continue with Google',
-                      icon: Icons.g_mobiledata, // Placeholder for Google Icon
-                      backgroundColor: AppColors.secondary,
-                      onPressed: _handleGoogleSignIn,
-                    ),
-                    const SizedBox(height: 16),
-                    // Apple Sign In
-                    _buildSocialButton(
-                      label: 'Sign in with Apple',
-                      icon: Icons.apple,
-                      backgroundColor: Colors.black,
-                      onPressed: () {}, // Dummy
-                    ),
-                    const Spacer(),
-                    // Other options
-                    Text(
-                      'Continue with email or phone',
-                      style: AppTextStyles.caption.copyWith(
-                        color: AppColors.textSecondary,
-                        fontWeight: FontWeight.w500,
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    // HandleBar icon shadow
+                    Container(
+                      width: 48,
+                      height: 5,
+                      decoration: BoxDecoration(
+                        color: Colors.black.withValues(alpha: 0.1),
+                        borderRadius: BorderRadius.circular(10),
                       ),
                     ),
                     const SizedBox(height: 32),
-                    // Legal links
-                    RichText(
-                      textAlign: TextAlign.center,
-                      text: TextSpan(
-                        style: AppTextStyles.caption.copyWith(
-                          fontSize: 10,
-                          color: AppColors.textSecondary.withValues(alpha: 0.5),
-                        ),
-                        children: const [
-                          TextSpan(text: 'By creating an account, you agree to our '),
-                          TextSpan(
-                            text: 'Terms of Service',
-                            style: TextStyle(decoration: TextDecoration.underline),
-                          ),
-                          TextSpan(text: ' and '),
-                          TextSpan(
-                            text: 'Privacy Policy',
-                            style: TextStyle(decoration: TextDecoration.underline),
-                          ),
-                        ],
+                    Text(
+                      'Welcome to',
+                      style: AppTextStyles.bodyText.copyWith(
+                        color: AppColors.textSecondary,
+                        letterSpacing: 0.5,
                       ),
                     ),
+                    const SizedBox(height: 8),
+                    Text(
+                      AppStrings.appName.toUpperCase(),
+                      style: AppTextStyles.heading1.copyWith(
+                        color: AppColors.primary,
+                        fontSize: 32,
+                        letterSpacing: 2.0,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                    const SizedBox(height: 16),
+                    Text(
+                      'Share the Gospel beautifully every day.',
+                      style: AppTextStyles.bodyText.copyWith(
+                        color: AppColors.textSecondary.withValues(alpha: 0.7),
+                        fontStyle: FontStyle.italic,
+                        fontSize: 14,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                    const SizedBox(height: 12),
+                    const Divider(height: 64, thickness: 1, color: Colors.blueGrey),
+                    
+                    if (_isLoading)
+                      const Center(
+                        child: Padding(
+                          padding: EdgeInsets.all(40.0),
+                          child: CircularProgressIndicator(color: AppColors.primary),
+                        ),
+                      )
+                    else ...[
+                      // Google Sign In
+                      _buildSocialButton(
+                        label: 'Continue with Google',
+                        icon: Icons.g_mobiledata, // Placeholder for Google Icon
+                        backgroundColor: AppColors.secondary,
+                        onPressed: _handleGoogleSignIn,
+                      ),
+                      const SizedBox(height: 32),
+                      // Legal links
+                      RichText(
+                        textAlign: TextAlign.center,
+                        text: TextSpan(
+                          style: AppTextStyles.caption.copyWith(
+                            fontSize: 10,
+                            color: AppColors.textSecondary.withValues(alpha: 0.5),
+                          ),
+                          children: const [
+                            TextSpan(text: 'By creating an account, you agree to our '),
+                            TextSpan(
+                              text: 'Terms of Service',
+                              style: TextStyle(decoration: TextDecoration.underline),
+                            ),
+                            TextSpan(text: ' and '),
+                            TextSpan(
+                              text: 'Privacy Policy',
+                              style: TextStyle(decoration: TextDecoration.underline),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
                   ],
-                ],
+                ),
               ),
             ),
           ),
