@@ -9,7 +9,7 @@ import 'package:screenshot/screenshot.dart';
 import 'package:share_plus/share_plus.dart';
 
 import '../../core/constants/app_colors.dart';
-import '../../core/constants/app_images.dart';
+import '../../core/constants/app_strings.dart';
 import '../../core/constants/app_text_styles.dart';
 import '../../core/services/font_service.dart';
 import '../../data/models/layer_model.dart';
@@ -31,10 +31,9 @@ class TemplateMakerScreen extends StatelessWidget {
           backgroundColor: AppColors.secondary,
           foregroundColor: AppColors.primary,
           elevation: 0,
-          title: Image.asset(
-            AppImages.logo,
-            height: 35,
-            fit: BoxFit.contain,
+          title: Text(
+            'Template Library',
+            style: AppTextStyles.heading2.copyWith(color: AppColors.primary),
           ),
           actions: [
             IconButton(
@@ -52,28 +51,46 @@ class TemplateMakerScreen extends StatelessWidget {
       backgroundColor: AppColors.background,
       appBar: AppBar(
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.white),
+          icon: const Icon(Icons.arrow_back),
           onPressed: () => provider.closeTemplate(),
         ),
         backgroundColor: AppColors.secondary,
-        centerTitle: true,
+        foregroundColor: Colors.white,
         elevation: 0,
-        title: Image.asset(
-          AppImages.logo,
-          height: 30,
-          fit: BoxFit.contain,
+        title: GestureDetector(
+          onTap: () => _showRenameDialog(context, provider),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Flexible(
+                child: Text(
+                  provider.currentTemplate.name,
+                  overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              const SizedBox(width: 6),
+              const Icon(Icons.edit, size: 14, color: AppColors.primary),
+            ],
+          ),
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.ios_share_outlined, color: Colors.white, size: 20),
+            icon: const Icon(Icons.ios_share_outlined),
+            tooltip: 'Export Template',
             onPressed: () => _exportJsonTemplate(context, provider),
           ),
           IconButton(
-            icon: const Icon(Icons.layers_outlined, color: Colors.white, size: 20),
+            icon: const Icon(Icons.layers_outlined),
+            tooltip: 'Layer List',
             onPressed: () => _showLayerList(context),
           ),
           IconButton(
-            icon: const Icon(Icons.save_outlined, color: AppColors.primary, size: 20),
+            icon: const Icon(Icons.save_outlined),
+            tooltip: AppStrings.saveTemplate,
             onPressed: () async {
               await provider.saveTemplate();
               if (context.mounted) {
@@ -83,27 +100,21 @@ class TemplateMakerScreen extends StatelessWidget {
               }
             },
           ),
-          const SizedBox(width: 8),
         ],
       ),
-      body: Stack(
+      body: Column(
         children: [
-          Column(
-            children: [
-              Expanded(child: _CanvasArea()),
-              // Only show EditorPanel if a layer is selected
-              if (provider.selectedLayer != null) _EditorPanel(),
-              // Padding for bottom toolbar
-              const SizedBox(height: 100),
-            ],
-          ),
-          Positioned(
-            left: 0,
-            right: 0,
-            bottom: 0,
-            child: _BottomToolBar(),
-          ),
+          // Canvas area (takes most of the screen)
+          Expanded(child: _CanvasArea()),
+          // Bottom editing panel (shows when a layer is selected)
+          _EditorPanel(),
         ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => _showAddLayerDialog(context),
+        backgroundColor: AppColors.primary,
+        elevation: 4,
+        child: const Icon(Icons.add, color: Colors.white, size: 28),
       ),
     );
   }
@@ -317,6 +328,45 @@ class TemplateMakerScreen extends StatelessWidget {
   }
 
   // ---------------------------------------------------------------------------
+  // Rename dialog
+  // ---------------------------------------------------------------------------
+
+  void _showRenameDialog(
+    BuildContext context,
+    TemplateEditorProvider provider,
+  ) {
+    final ctrl = TextEditingController(text: provider.currentTemplate.name);
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: const Text('Rename Template'),
+        content: TextField(
+          controller: ctrl,
+          autofocus: true,
+          decoration: const InputDecoration(hintText: 'Template name'),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(ctx),
+            child: const Text('Cancel'),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              provider.renameTemplate(ctrl.text.trim());
+              Navigator.pop(ctx);
+            },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: AppColors.primary,
+              foregroundColor: Colors.white,
+            ),
+            child: const Text('Save'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  // ---------------------------------------------------------------------------
   // Layer list
   // ---------------------------------------------------------------------------
 
@@ -326,18 +376,19 @@ class TemplateMakerScreen extends StatelessWidget {
       isScrollControlled: true,
       backgroundColor: Colors.transparent,
       builder: (ctx) => DraggableScrollableSheet(
-        initialChildSize: 0.65,
-        minChildSize: 0.4,
-        maxChildSize: 0.9,
+        initialChildSize: 0.55,
+        minChildSize: 0.3,
+        maxChildSize: 0.85,
         builder: (_, controller) => Container(
           decoration: const BoxDecoration(
             color: AppColors.background,
-            borderRadius: BorderRadius.vertical(top: Radius.circular(32)),
+            borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
           ),
           child: Consumer<TemplateEditorProvider>(
             builder: (_, provider, __) {
-              final layers = List<LayerModel>.from(provider.currentTemplate.layers)
-                ..sort((a, b) => b.layer.compareTo(a.layer));
+              final layers = List<LayerModel>.from(
+                provider.currentTemplate.layers,
+              )..sort((a, b) => b.layer.compareTo(a.layer));
 
               return Column(
                 children: [
@@ -346,114 +397,91 @@ class TemplateMakerScreen extends StatelessWidget {
                     width: 40,
                     height: 4,
                     decoration: BoxDecoration(
-                      color: Colors.black12,
+                      color: Colors.black26,
                       borderRadius: BorderRadius.circular(2),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'TEMPLATE LAYERS',
-                          style: AppTextStyles.heading2.copyWith(
-                            fontSize: 18,
-                            letterSpacing: 2.0,
-                          ),
-                        ),
-                        const SizedBox(height: 20),
-                        // Search Bar
-                        Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 16),
-                          decoration: BoxDecoration(
-                            color: AppColors.secondary,
-                            borderRadius: BorderRadius.circular(24),
-                          ),
-                          child: TextField(
-                            style: const TextStyle(color: Colors.white, fontSize: 13),
-                            decoration: InputDecoration(
-                              icon: Icon(Icons.search, color: Colors.white.withValues(alpha: 0.5), size: 18),
-                              hintText: 'Search for specific layer',
-                              hintStyle: TextStyle(color: Colors.white.withValues(alpha: 0.3), fontSize: 13),
-                              border: InputBorder.none,
-                            ),
-                          ),
-                        ),
-                      ],
+                  const Padding(
+                    padding: EdgeInsets.all(16.0),
+                    child: Text(
+                      'Layers',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18,
+                        color: AppColors.textPrimary,
+                      ),
                     ),
                   ),
                   Expanded(
                     child: ListView.builder(
                       controller: controller,
-                      padding: const EdgeInsets.symmetric(horizontal: 16),
                       itemCount: layers.length,
                       itemBuilder: (_, i) {
                         final layer = layers[i];
-                        final isSelected = provider.selectedLayer?.id == layer.id;
-                        
-                        return Container(
-                          margin: const EdgeInsets.only(bottom: 8),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(16),
-                            border: Border.all(
-                              color: isSelected ? AppColors.primary : Colors.transparent,
-                              width: 1.5,
-                            ),
-                            boxShadow: isSelected ? [
-                              BoxShadow(
-                                color: AppColors.primary.withValues(alpha: 0.1),
-                                blurRadius: 10,
-                                offset: const Offset(0, 4),
-                              )
-                            ] : [],
+                        final isSelected =
+                            provider.selectedLayer?.id == layer.id;
+                        return ListTile(
+                          tileColor: isSelected
+                              ? AppColors.primary.withValues(alpha: 0.1)
+                              : null,
+                          leading: Icon(
+                            layer.type == LayerType.text
+                                ? Icons.text_fields
+                                : Icons.image_outlined,
+                            color: isSelected ? AppColors.primary : Colors.grey,
                           ),
-                          child: ListTile(
-                            contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-                            leading: Container(
-                              padding: const EdgeInsets.all(8),
-                              decoration: BoxDecoration(
-                                color: isSelected ? AppColors.primary.withValues(alpha: 0.1) : AppColors.background,
-                                shape: BoxShape.circle,
-                              ),
-                              child: Icon(
-                                layer.type == LayerType.text ? Icons.text_fields : Icons.image_outlined,
-                                color: isSelected ? AppColors.primary : AppColors.textSecondary.withValues(alpha: 0.5),
-                                size: 20,
-                              ),
+                          title: Text(
+                            layer.name ?? layer.textType?.name ?? layer.id,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                              fontWeight: isSelected
+                                  ? FontWeight.bold
+                                  : FontWeight.normal,
                             ),
-                            title: Text(
-                              (layer.name ?? layer.textType?.name ?? 'Layer').toUpperCase(),
-                              style: AppTextStyles.caption.copyWith(
-                                fontWeight: FontWeight.bold,
-                                color: isSelected ? AppTextStyles.heading1.color : AppColors.textSecondary,
-                                letterSpacing: 1.0,
-                              ),
-                            ),
-                            subtitle: Text(
-                              'ORDER: ${layer.layer}',
-                              style: AppTextStyles.caption.copyWith(fontSize: 10, color: AppColors.textSecondary.withValues(alpha: 0.5)),
-                            ),
-                            trailing: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                IconButton(
-                                  icon: Icon(
-                                    layer.visible ? Icons.visibility_outlined : Icons.visibility_off_outlined,
-                                    size: 18,
-                                    color: layer.visible ? AppColors.primary : Colors.grey,
-                                  ),
-                                  onPressed: () => provider.updateLayerVisibility(layer.id, visible: !layer.visible),
+                          ),
+                          subtitle: Text(
+                            'Layer ${layer.layer} • ${layer.type.name}',
+                            style: const TextStyle(fontSize: 12),
+                          ),
+                          trailing: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              // Visibility toggle
+                              IconButton(
+                                icon: Icon(
+                                  layer.visible
+                                      ? Icons.visibility
+                                      : Icons.visibility_off,
+                                  color: layer.visible
+                                      ? AppColors.primary
+                                      : Colors.grey,
+                                  size: 20,
                                 ),
-                                Icon(Icons.lock_outline, size: 18, color: Colors.grey.withValues(alpha: 0.3)),
-                              ],
-                            ),
-                            onTap: () {
-                              provider.selectLayer(layer.id);
-                              Navigator.pop(ctx);
-                            },
+                                onPressed: () => provider.updateLayerVisibility(
+                                  layer.id,
+                                  visible: !layer.visible,
+                                ),
+                              ),
+                              // Up/Down z-order
+                              IconButton(
+                                icon: const Icon(Icons.arrow_upward, size: 18),
+                                onPressed: () =>
+                                    provider.bringLayerForward(layer.id),
+                              ),
+                              IconButton(
+                                icon: const Icon(
+                                  Icons.arrow_downward,
+                                  size: 18,
+                                ),
+                                onPressed: () =>
+                                    provider.sendLayerBackward(layer.id),
+                              ),
+                            ],
                           ),
+                          onTap: () {
+                            provider.selectLayer(layer.id);
+                            Navigator.pop(ctx);
+                          },
                         );
                       },
                     ),
@@ -651,63 +679,7 @@ class _CanvasAreaState extends State<_CanvasArea> {
 // =============================================================================
 
 /// Slides up from the bottom when a layer is selected and provides tabbed
-/// editing
-class _BottomToolBar extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 90,
-      decoration: const BoxDecoration(
-        color: AppColors.secondary,
-        borderRadius: BorderRadius.vertical(top: Radius.circular(32)),
-      ),
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          _buildToolItem(context, Icons.format_list_bulleted_rounded, 'LIST', () => (context.read<TemplateMakerScreen>())._showLayerList(context)),
-          _buildToolItem(context, Icons.text_fields_rounded, 'TEXT', () => _showAddTextOptions(context)),
-          _buildToolItem(context, Icons.sticky_note_2_outlined, 'STICKER', () {}),
-          _buildToolItem(context, Icons.image_outlined, 'IMAGE', () => _showAddImageOptions(context)),
-          _buildToolItem(context, Icons.wallpaper_rounded, 'BACKGROUND', () {}),
-          _buildToolItem(context, Icons.crop_free_rounded, 'CANVAS', () {}),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildToolItem(BuildContext context, IconData icon, String label, VoidCallback onTap) {
-    return InkWell(
-      onTap: onTap,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Icon(icon, color: Colors.white.withValues(alpha: 0.6), size: 24),
-          const SizedBox(height: 6),
-          Text(
-            label,
-            style: AppTextStyles.caption.copyWith(
-              color: Colors.white.withValues(alpha: 0.6),
-              fontSize: 8,
-              letterSpacing: 1.5,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  void _showAddTextOptions(BuildContext context) {
-    // Re-use _showAddLayerDialog but filtered for text
-    (context.read<TemplateMakerScreen>())._showAddLayerDialog(context);
-  }
-
-  void _showAddImageOptions(BuildContext context) {
-     (context.read<TemplateMakerScreen>())._showAddLayerDialog(context);
-  }
-}
-
+/// editing: Text tab (text layers), Image tab (image layers), Layer tab (all).
 class _EditorPanel extends StatefulWidget {
   @override
   State<_EditorPanel> createState() => _EditorPanelState();
@@ -741,10 +713,9 @@ class _EditorPanelState extends State<_EditorPanel>
           curve: Curves.easeOut,
           decoration: BoxDecoration(
             color: Colors.white,
-            borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withValues(alpha: 0.1),
+                color: Colors.black.withValues(alpha: 0.15),
                 blurRadius: 16,
                 offset: const Offset(0, -4),
               ),
@@ -755,36 +726,51 @@ class _EditorPanelState extends State<_EditorPanel>
             children: [
               // Header strip
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                color: AppColors.secondary,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 6,
+                ),
                 child: Row(
                   children: [
-                    Icon(
-                      layer.type == LayerType.text ? Icons.text_fields : Icons.image_outlined,
-                      color: AppColors.primary,
-                      size: 16,
-                    ),
+                    const Icon(Icons.tune, color: AppColors.primary, size: 18),
                     const SizedBox(width: 8),
                     Expanded(
                       child: Text(
-                        (layer.name ?? layer.textType?.name ?? 'Layer').toUpperCase(),
-                        style: AppTextStyles.caption.copyWith(
+                        layer.name ?? layer.textType?.name ?? 'Layer',
+                        style: const TextStyle(
+                          color: Colors.white,
                           fontWeight: FontWeight.bold,
-                          color: AppColors.textPrimary,
-                          letterSpacing: 1.0,
+                          fontSize: 13,
                         ),
                         overflow: TextOverflow.ellipsis,
                       ),
                     ),
+                    // Quick action: delete
                     IconButton(
-                      icon: const Icon(Icons.copy, color: Colors.grey, size: 18),
-                      onPressed: () => provider.duplicateLayer(layer.id),
-                    ),
-                    IconButton(
-                      icon: const Icon(Icons.delete_outline, color: AppColors.error, size: 18),
+                      icon: const Icon(
+                        Icons.delete_outline,
+                        color: AppColors.error,
+                        size: 20,
+                      ),
                       onPressed: () => provider.removeLayer(layer.id),
                     ),
+                    // Quick action: duplicate
                     IconButton(
-                      icon: const Icon(Icons.close, color: Colors.grey, size: 18),
+                      icon: const Icon(
+                        Icons.copy,
+                        color: Colors.white70,
+                        size: 18,
+                      ),
+                      onPressed: () => provider.duplicateLayer(layer.id),
+                    ),
+                    // Close panel
+                    IconButton(
+                      icon: const Icon(
+                        Icons.close,
+                        color: Colors.white70,
+                        size: 20,
+                      ),
                       onPressed: () => provider.clearSelection(),
                     ),
                   ],
@@ -794,14 +780,12 @@ class _EditorPanelState extends State<_EditorPanel>
               TabBar(
                 controller: _tabController,
                 labelColor: AppColors.primary,
-                unselectedLabelColor: Colors.black26,
+                unselectedLabelColor: Colors.black54,
                 indicatorColor: AppColors.primary,
-                indicatorSize: TabBarIndicatorSize.label,
-                labelStyle: AppTextStyles.caption.copyWith(fontWeight: FontWeight.bold, fontSize: 10),
                 tabs: const [
-                  Tab(text: 'STYLE'),
-                  Tab(text: 'IMAGE'),
-                  Tab(text: 'ARRANGE'),
+                  Tab(text: 'Text', icon: Icon(Icons.text_fields, size: 16)),
+                  Tab(text: 'Image', icon: Icon(Icons.image, size: 16)),
+                  Tab(text: 'Layer', icon: Icon(Icons.layers, size: 16)),
                 ],
               ),
               // Tab content
@@ -810,9 +794,20 @@ class _EditorPanelState extends State<_EditorPanel>
                 child: TabBarView(
                   controller: _tabController,
                   children: [
-                    _buildTextStyleTab(layer, provider),
-                    _buildImageStyleTab(layer, provider),
-                    _buildArrangeTab(layer, provider),
+                    // --- Text Tab ---
+                    layer.type == LayerType.text
+                        ? _TextEditTab(layer: layer, provider: provider)
+                        : const _DisabledTab(
+                            message: 'Select a text layer to edit text.',
+                          ),
+                    // --- Image Tab ---
+                    layer.type == LayerType.image
+                        ? _ImageEditTab(layer: layer, provider: provider)
+                        : const _DisabledTab(
+                            message: 'Select an image layer to edit image.',
+                          ),
+                    // --- Layer Tab ---
+                    _LayerEditTab(layer: layer, provider: provider),
                   ],
                 ),
               ),
@@ -822,28 +817,21 @@ class _EditorPanelState extends State<_EditorPanel>
       },
     );
   }
+}
 
-  Widget _buildTextStyleTab(LayerModel layer, TemplateEditorProvider provider) {
-    if (layer.type != LayerType.text) {
-      return const Center(child: Text('Not a text layer'));
-    }
-    return SingleChildScrollView(
-      padding: const EdgeInsets.all(16),
-      child: Column(
-        children: [
-           Text('Text Controls Coming Soon', style: AppTextStyles.caption),
-        ],
-      ),
-    );
-  }
+class _DisabledTab extends StatelessWidget {
+  final String message;
 
-  Widget _buildImageStyleTab(LayerModel layer, TemplateEditorProvider provider) {
-    return const Center(child: Text('Image Controls Coming Soon'));
-  }
+  const _DisabledTab({required this.message});
 
-  Widget _buildArrangeTab(LayerModel layer, TemplateEditorProvider provider) {
-    return const Center(child: Text('Layer Arrangement Coming Soon'));
-  }
+  @override
+  Widget build(BuildContext context) => Center(
+    child: Text(
+      message,
+      style: const TextStyle(color: Colors.black38, fontSize: 13),
+      textAlign: TextAlign.center,
+    ),
+  );
 }
 
 // =============================================================================
